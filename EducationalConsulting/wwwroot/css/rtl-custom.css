@@ -1,0 +1,72 @@
+﻿body {
+    font-family: 'Vazir', 'Tahoma', sans-serif;
+    text-align: right;
+    direction: rtl;
+}
+
+.navbar-nav {
+    padding-right: 0;
+}
+
+    .navbar-nav .nav-item {
+        margin-left: 15px;
+        margin-right: 0;
+    }
+
+.form-control, input, textarea, select {
+    text-align: right;
+}
+
+.search_icon {
+    margin-right: 15px;
+    margin-left: 0;
+}
+
+.carousel-control-prev {
+    left: auto;
+    right: 0;
+}
+
+.carousel-control-next {
+    right: auto;
+    left: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    transform: rotate(180deg);
+}
+
+.banner_taital, .banner_text {
+    text-align: right;
+}
+
+.padding_left_15 {
+    padding-left: 0;
+    padding-right: 15px;
+}
+
+.call_text img {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.social_icon ul {
+    padding-right: 0;
+}
+
+    .social_icon ul li {
+        margin: 0 0 0 15px;
+    }
+
+.fa-arrow-left:before {
+    content: "\f060";
+}
+
+.fa-arrow-right:before {
+    content: "\f061";
+}
+
+.row {
+    direction: rtl;
+}

@@ -1,0 +1,52 @@
+﻿<div class="footer_section">
+    <div class="container">
+        <h1 class="touch_text">Get In Touch</h1>
+        <div class="email_box">
+            <div class="input_main">
+                <form asp-action="SubmitContact" asp-controller="Home" method="post">
+                    <div class="form-group">
+                        <input type="text" class="email-bt" placeholder="Name" name="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="email-bt" placeholder="Phone" name="Phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="email-bt" placeholder="Email" name="Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="massage-bt" placeholder="Message" rows="5" name="Message"></textarea>
+                    </div>
+                    <div class="send_bt">
+                        <button type="submit">SEND</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="call_main">
+            <div class="call_text">
+                <img src="~/images/call-icon.png">
+                <span class="padding_left_15">Call Now +01 123467890</span>
+            </div>
+            <div class="call_text">
+                <img src="~/images/mail-icon.png">
+                <span class="padding_left_15">demo@gmail.com</span>
+            </div>
+        </div>
+        <div class="social_icon">
+            <ul>
+                <li><a href="#"><img src="~/images/fb-icon.png" alt="Facebook"></a></li>
+                <li><a href="#"><img src="~/images/twitter-icon.png" alt="Twitter"></a></li>
+                <li><a href="#"><img src="~/images/linkedin-icon.png" alt="LinkedIn"></a></li>
+                <li><a href="#"><img src="~/images/instagram-icon.png" alt="Instagram"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="copyright_section">
+    <div class="container">
+        <p class="copyright_text">
+            @DateTime.Now.Year All Rights Reserved. Design by <a href="http://html.design">Free Html Templates</a>
+        </p>
+    </div>
+</div>

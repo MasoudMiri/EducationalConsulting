@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Contact Us";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="contact_section layout_padding">
+    <div class="container">
+        <h1 class="contact_taital text-center" style="margin-bottom: 50px;">Contact Us</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input_main">
+                    <form asp-action="SubmitContact" asp-controller="Home" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Phone Number" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Address" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Message" rows="5" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contact_info">
+                    <h3>Get In Touch</h3>
+                    <p><i class="fa fa-phone"></i> <strong>Phone:</strong> +01 123467890</p>
+                    <p><i class="fa fa-envelope"></i> <strong>Email:</strong> demo@gmail.com</p>
+                    <p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 123 Main Street, New York, USA</p>
+                    <hr>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                    <p>Saturday: 10:00 AM - 4:00 PM</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

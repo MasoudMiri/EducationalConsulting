@@ -1,0 +1,82 @@
+﻿@{
+    var currentPage = ViewContext.RouteData.Values["Controller"]?.ToString();
+}
+
+<div class="header_section">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="logo">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/images/logo3.png" alt="Logo" style="width: 110px; height: 110px;">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item @(currentPage == "Home" ? "active" : "")">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">صحفه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Languages")">لیست خدمات </a>
+                    </li>
+                    <li class="nav-item @(currentPage == "Services" ? "active" : "")">
+                        <a class="nav-link" href="@Url.Action("Index", "Services")">لیست مقالات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Events")">مشاوره رایگان</a>
+                    </li>
+                    <li class="nav-item @(currentPage == "Contact" ? "active" : "")">
+                        <a class="nav-link" href="@Url.Action("Index", "Contact")">همکاری بـا مـا</a>
+                    </li>
+                    <li class="nav-item @(currentPage == "Contact" ? "active" : "")">
+                        <a class="nav-link" href="@Url.Action("Index", "Contact")">مشاور خودت شو</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="login_text">
+                        <a href="@Url.Action("Login", "Account")">ورود</a>
+                    </div>
+                    <div class="search_icon">
+                        <a href="#"><img src="~/images/search-icon.png" alt="Search"></a>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <!-- فقط در صفحه اصلی بنر نمایش داده شود -->
+    @if (currentPage == "Home")
+    {
+        <div class="banner_section layout_padding">
+            <div class="container">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <p class="banner_text">مشاوره تخصصی</p>
+                            <h1 class="banner_taital">گروه مشاورین SaLi</h1>
+                            <div class="read_bt"><a href="#">آشنایی با ما </a></div>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="banner_text">مشاوره تخصصی</p>
+                            <h1 class="banner_taital">گروه مشاورین SaLi</h1>
+                            <div class="read_bt"><a href="#">آشنایی با ما</a></div>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="banner_text">مشاوره تخصصی</p>
+                            <h1 class="banner_taital">گروه مشاورین SaLi</h1>
+                            <div class="read_bt"><a href="#">آشنایی با ما</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="play_icon">
+                <a href="#"><img src="~/images/play-icon.png" alt="Play"></a>
+            </div>
+        </div>
+    }
+</div>
