@@ -6,7 +6,7 @@ namespace YourProject.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["Title"] = "Home - Oinia Language School";
+            ViewData["Title"] = "Home - گروه مشاورین SaLi";
             return View();
         }
 
