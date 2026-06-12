@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+﻿/*--------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
 
 
 /*--------------------------------------------------------------------- import Fonts ---------------------------------------------------------------------*/
@@ -228,6 +228,7 @@ button {
     height: auto;
     background-size: 100%;
 }
+
 
 .logo {
     width: 35%;
@@ -1105,4 +1106,32 @@ textarea#comment::placeholder {
 
 .margin_90 {
     margin: 90px 0px;
+}
+@media (max-width: 1200px) {
+    .header_section {
+        min-height: 80vh;
+        background-position: 50% 30%;
+    }
+}
+
+@media (max-width: 992px) {
+    .header_section {
+        min-height: 70vh;
+        background-position: 50% 20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header_section {
+        min-height: 60vh;
+        background-position: 50% 10%;
+        background-size: cover;
+    }
+}
+
+@media (max-width: 480px) {
+    .header_section {
+        min-height: 50vh;
+        background-position: 50% 0%;
+    }
 }
