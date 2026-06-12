@@ -19,11 +19,23 @@
                         <a class="nav-link" href="@Url.Action("Index", "Home")">صحفه اصلی</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Languages")">لیست خدمات </a>
+                        <a class="nav-link" href="@Url.Action("Index", "Languages")">لیست خدمات</a>
                     </li>
-                    <li class="nav-item @(currentPage == "Services" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index", "Services")">لیست مقالات</a>
-                    </li>
+                    
+                   <!-- منوی کشویی لیست مقالات - شروع -->
+<li class="nav-item dropdown @(currentPage == "Articles" ? "active" : "")">
+    <a class="nav-link dropdown-toggle" href="#" id="articlesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        لیست مقالات
+    </a>
+    <div class="dropdown-menu" aria-labelledby="articlesDropdown">
+        <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "عمومی" })">مقالات عمومی</a>
+        <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "ریاضی" })">مقالات ریاضی</a>
+        <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "پزشکی" })">مقالات پزشکی</a>
+        <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "انسانی" })">مقالات انسانی</a>
+    </div>
+</li>
+<!-- منوی کشویی لیست مقالات - پایان -->
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index", "Events")">مشاوره رایگان</a>
                     </li>

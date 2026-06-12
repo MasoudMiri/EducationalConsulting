@@ -1,0 +1,69 @@
+﻿@model EducationalConsulting.DTOs.ArticleDetailDto
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- عنوان مقاله -->
+            <h1 class="text-center mb-4" style="color: #dbc64c;">@Model.Title</h1>
+
+            <!-- اطلاعات مقاله -->
+            <div class="text-center text-muted mb-4">
+                <span><i class="fa fa-folder"></i> دسته: @Model.CategoryName</span>
+                <span class="mx-3"><i class="fa fa-calendar"></i> @Model.CreateDate.ToString("yyyy/MM/dd")</span>
+                <span><i class="fa fa-eye"></i> بازدید: @Model.ViewCount</span>
+                @if (Model.LastModifiedDate.HasValue)
+                {
+                    <span class="mx-3"><i class="fa fa-edit"></i> آخرین ویرایش: @Model.LastModifiedDate.Value.ToString("yyyy/MM/dd")</span>
+                }
+            </div>
+
+            <!-- عکس مقاله -->
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="text-center mb-4">
+                    <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid rounded shadow" style="max-height: 400px; width: auto;">
+                </div>
+            }
+
+            <!-- محتوای مقاله -->
+            <div class="article-content p-4 bg-light rounded">
+                @Html.Raw(Model.Content)
+            </div>
+
+            <!-- دکمه بازگشت -->
+            <div class="text-center mt-5">
+                <a href="javascript:history.back()" class="btn btn-outline-warning">
+                    <i class="fa fa-arrow-right"></i> بازگشت به لیست مقالات
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .article-content {
+        line-height: 1.8;
+        font-size: 16px;
+    }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+    .btn-outline-warning {
+        border-color: #dbc64c;
+        color: #dbc64c;
+    }
+
+        .btn-outline-warning:hover {
+            background-color: #dbc64c;
+            color: #000;
+        }
+</style>
