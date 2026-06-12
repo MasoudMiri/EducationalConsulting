@@ -70,3 +70,16 @@
 .row {
     direction: rtl;
 }
+.sidebar-left {
+    order: -1; /* این باعث میشه سایدبار به سمت چپ بره */
+}
+
+/* برای صفحات با سایدبار */
+.with-sidebar .col-md-3 {
+    order: -1;
+}
+
+/* اطمینان از راست‌چین بودن بقیه محتوا */
+.with-sidebar .col-md-9 {
+    order: 0;
+}

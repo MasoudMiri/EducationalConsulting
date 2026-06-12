@@ -1,6 +1,6 @@
-﻿using EducationalConsulting.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using EducationalConsulting.Data;
 using EducationalConsulting.Services;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,14 +8,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // اضافه کردن DbContext
-builder.Services.AddDbContext<EducationalConsulting.Data.ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// ثبت Repositoryها
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+
+// ثبت Serviceها
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
-
+// اضافه کردن Session (این قسمت رو اضافه کن)
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -30,6 +42,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+
+// اضافه کردن Session (این خط رو هم اضافه کن)
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

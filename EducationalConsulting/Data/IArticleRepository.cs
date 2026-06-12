@@ -1,4 +1,5 @@
-﻿using EducationalConsulting.Models;
+﻿using EducationalConsulting.DTOs;
+using EducationalConsulting.Models;
 
 namespace EducationalConsulting.Data
 {
@@ -12,5 +13,7 @@ namespace EducationalConsulting.Data
         Task UpdateAsync(Article article);
         Task DeleteAsync(int id);
         Task<bool> ArticleExistsAsync(int id);
+        Task<IEnumerable<ArticleListDto>> GetLatestArticlesAsync(int count);
+
     }
 }

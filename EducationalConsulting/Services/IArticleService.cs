@@ -11,5 +11,6 @@ namespace EducationalConsulting.Services
         Task<bool> DeleteArticleAsync(int id);
         Task IncrementViewCountAsync(int id);
         Task<IEnumerable<AdminArticlesViewModel>> GetAdminArticlesAsync();
+        Task<IEnumerable<ArticleListDto>> GetLatestArticlesAsync(int count);  // ← این خط جدید
     }
 }

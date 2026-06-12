@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "داشبورد مدیریت";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-primary shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">مدیریت مقالات</h5>
+                <p class="card-text">افزودن، ویرایش و حذف مقالات</p>
+                <a href="@Url.Action("Articles")" class="btn btn-light">ورود به بخش مقالات</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-success shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">دسته‌بندی‌ها</h5>
+                <p class="card-text">مدیریت دسته‌بندی مقالات</p>
+                <a href="#" class="btn btn-light">به زودی...</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-info shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">تنظیمات سایت</h5>
+                <p class="card-text">تنظیمات عمومی سایت</p>
+                <a href="#" class="btn btn-light">به زودی...</a>
+            </div>
+        </div>
+    </div>
+</div>

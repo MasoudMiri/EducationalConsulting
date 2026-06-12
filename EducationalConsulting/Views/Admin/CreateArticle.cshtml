@@ -1,0 +1,72 @@
+﻿@using EducationalConsulting.DTOs
+@model ArticleCreateDto
+@{
+    ViewData["Title"] = "افزودن مقاله جدید";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var categories = ViewBag.Categories as IEnumerable<CategoryDto>;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">افزودن مقاله جدید</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateArticle" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label">عنوان مقاله</label>
+                        <input asp-for="Title" class="form-control" required>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Summary" class="form-label">خلاصه مقاله</label>
+                        <textarea asp-for="Summary" class="form-control" rows="3" placeholder="خلاصه مقاله (اختیاری)"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="CategoryId" class="form-label">دسته‌بندی</label>
+                        <select asp-for="CategoryId" class="form-control" required>
+                            <option value="">انتخاب کنید...</option>
+                            @if (categories != null)
+                            {
+                                @foreach (var cat in categories)
+                                {
+                                    <option value="@cat.Id">@cat.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" class="form-label">عکس مقاله</label>
+                        <input asp-for="ImageFile" type="file" class="form-control" accept="image/*">
+                        <small class="text-muted">فرمت‌های مجاز: jpg, jpeg, png, gif</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Content" class="form-label">محتوا</label>
+                        <textarea asp-for="Content" class="form-control" rows="15" required placeholder="متن مقاله را اینجا بنویسید...
+                                  می‌توانید از تگ‌های HTML استفاده کنید:
+<p>برای پاراگراف</p>
+<strong>متن پررنگ</strong>
+<ul><li>لیست</li></ul>"></textarea>
+                        <small class="text-muted">برای فرمت دهی می‌توانید از HTML استفاده کنید</small>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input asp-for="IsActive" class="form-check-input" type="checkbox">
+                        <label asp-for="IsActive" class="form-check-label">فعال باشد</label>
+                        <small class="text-muted d-block">اگر فعال باشد، مقاله در سایت نمایش داده می‌شود</small>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="@Url.Action("Articles")" class="btn btn-secondary">بازگشت</a>
+                        <button type="submit" class="btn btn-primary">ذخیره مقاله</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

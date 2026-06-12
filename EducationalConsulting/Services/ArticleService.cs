@@ -22,15 +22,12 @@ namespace EducationalConsulting.Services
 
         public async Task<IEnumerable<ArticleListDto>> GetArticlesByCategoryNameAsync(string categoryName)
         {
-            // پیدا کردن دسته بر اساس نام
             var category = await _categoryRepository.GetByNameAsync(categoryName);
             if (category == null)
                 return new List<ArticleListDto>();
 
-            // گرفتن مقالات فعال اون دسته
             var articles = await _articleRepository.GetActiveArticlesByCategoryIdAsync(category.Id);
 
-            // تبدیل به DTO
             return articles.Select(a => new ArticleListDto
             {
                 Id = a.Id,
@@ -53,13 +50,15 @@ namespace EducationalConsulting.Services
             {
                 Id = article.Id,
                 Title = article.Title,
+                Summary = article.Summary,
                 Content = article.Content,
                 ImageUrl = article.ImageUrl,
                 CreateDate = article.CreateDate,
                 LastModifiedDate = article.LastModifiedDate,
                 ViewCount = article.ViewCount,
                 CategoryName = article.Category?.Name,
-                CategoryId = article.CategoryId
+                CategoryId = article.CategoryId,
+                IsActive = article.IsActive
             };
         }
 
@@ -69,7 +68,6 @@ namespace EducationalConsulting.Services
             {
                 string imagePath = null;
 
-                // آپلود عکس
                 if (articleCreateDto.ImageFile != null)
                 {
                     imagePath = await SaveImageAsync(articleCreateDto.ImageFile);
@@ -104,10 +102,8 @@ namespace EducationalConsulting.Services
                 if (article == null)
                     return false;
 
-                // آپلود عکس جدید اگه وجود داشته باشه
                 if (articleUpdateDto.ImageFile != null)
                 {
-                    // حذف عکس قدیمی
                     if (!string.IsNullOrEmpty(article.ImageUrl))
                     {
                         DeleteOldImage(article.ImageUrl);
@@ -159,40 +155,6 @@ namespace EducationalConsulting.Services
             }
         }
 
-        // متد کمکی برای ذخیره عکس
-        private async Task<string> SaveImageAsync(IFormFile imageFile)
-        {
-            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "articles");
-
-            // ایجاد پوشه اگه وجود نداره
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
-
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
-
-            return "/images/articles/" + uniqueFileName;
-        }
-
-        // متد کمکی برای حذف عکس قدیمی
-        private void DeleteOldImage(string imagePath)
-        {
-            if (string.IsNullOrEmpty(imagePath))
-                return;
-
-            string fullPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath.TrimStart('/'));
-            if (File.Exists(fullPath))
-            {
-                File.Delete(fullPath);
-            }
-        }
         public async Task<IEnumerable<AdminArticlesViewModel>> GetAdminArticlesAsync()
         {
             var allArticles = new List<AdminArticlesViewModel>();
@@ -213,6 +175,64 @@ namespace EducationalConsulting.Services
             }
 
             return allArticles.OrderByDescending(a => a.CreateDate);
+        }
+
+        public async Task<IEnumerable<ArticleListDto>> GetLatestArticlesAsync(int count)
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            var allArticles = new List<ArticleListDto>();
+
+            foreach (var category in categories)
+            {
+                var articles = await _articleRepository.GetActiveArticlesByCategoryIdAsync(category.Id);
+                allArticles.AddRange(articles.Select(a => new ArticleListDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Summary = a.Summary,
+                    ImageUrl = a.ImageUrl,
+                    CreateDate = a.CreateDate,
+                    ViewCount = a.ViewCount,
+                    CategoryName = category.Name
+                }));
+            }
+
+            return allArticles
+                .OrderByDescending(a => a.CreateDate)
+                .Take(count)
+                .ToList();
+        }
+
+        private async Task<string> SaveImageAsync(IFormFile imageFile)
+        {
+            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "articles");
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+
+            return "/images/articles/" + uniqueFileName;
+        }
+
+        private void DeleteOldImage(string imagePath)
+        {
+            if (string.IsNullOrEmpty(imagePath))
+                return;
+
+            string fullPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath.TrimStart('/'));
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
         }
     }
 }

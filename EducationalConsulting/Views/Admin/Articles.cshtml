@@ -1,0 +1,102 @@
+﻿@model IEnumerable<EducationalConsulting.DTOs.AdminArticlesViewModel>
+@{
+    ViewData["Title"] = "مدیریت مقالات";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>مدیریت مقالات</h2>
+    <a href="@Url.Action("CreateArticle")" class="btn btn-success">
+        <i class="fas fa-plus"></i> مقاله جدید
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>شناسه</th>
+                        <th>عنوان</th>
+                        <th>دسته‌بندی</th>
+                        <th>تاریخ</th>
+                        <th>بازدید</th>
+                        <th>وضعیت</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var article in Model)
+                    {
+                        <tr>
+                            <td>@article.Id</td>
+                            <td>@article.Title</td>
+                            <td>@article.CategoryName</td>
+                            <td>@article.CreateDate.ToString("yyyy/MM/dd")</td>
+                            <td>@article.ViewCount</td>
+                            <td>
+                                @if (article.IsActive)
+                                {
+                                    <span class="badge bg-success">فعال</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">غیرفعال</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditArticle", new { id = article.Id })" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button onclick="deleteArticle(@article.Id)" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function deleteArticle(id) {
+            if (confirm('آیا از حذف این مقاله مطمئن هستید؟')) {
+                $.ajax({
+                    url: '@Url.Action("DeleteArticle")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message || 'خطا در حذف مقاله');
+                        }
+                    },
+                    error: function() {
+                        alert('خطا در ارتباط با سرور');
+                    }
+                });
+            }
+        }
+    </script>
+}

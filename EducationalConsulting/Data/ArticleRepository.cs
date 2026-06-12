@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EducationalConsulting.DTOs;
 using EducationalConsulting.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducationalConsulting.Data
 {
@@ -72,6 +73,29 @@ namespace EducationalConsulting.Data
         public async Task<bool> ArticleExistsAsync(int id)
         {
             return await _context.Articles.AnyAsync(e => e.Id == id);
+        }
+
+        // متد جدید برای گرفتن آخرین مقالات (درست شده)
+        public async Task<IEnumerable<ArticleListDto>> GetLatestArticlesAsync(int count)
+        {
+            var articles = await _context.Articles
+                .Include(a => a.Category)
+                .Where(a => a.IsActive)
+                .OrderByDescending(a => a.CreateDate)
+                .Take(count)
+                .Select(a => new ArticleListDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Summary = a.Summary,
+                    ImageUrl = a.ImageUrl,
+                    CreateDate = a.CreateDate,
+                    ViewCount = a.ViewCount,
+                    CategoryName = a.Category != null ? a.Category.Name : ""
+                })
+                .ToListAsync();
+
+            return articles;
         }
     }
 }
