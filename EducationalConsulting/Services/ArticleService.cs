@@ -234,5 +234,47 @@ namespace EducationalConsulting.Services
                 File.Delete(fullPath);
             }
         }
+        public async Task<PagedResult<ArticleListDto>> GetPagedArticlesByCategoryNameAsync(string categoryName, int page, int pageSize = 10)
+        {
+            var category = await _categoryRepository.GetByNameAsync(categoryName);
+            if (category == null)
+            {
+                return new PagedResult<ArticleListDto>
+                {
+                    Items = new List<ArticleListDto>(),
+                    Pagination = new PaginationDto { CurrentPage = page, PageSize = pageSize, TotalCount = 0 }
+                };
+            }
+
+            // گرفتن کل مقالات فعال این دسته
+            var allArticles = await _articleRepository.GetActiveArticlesByCategoryIdAsync(category.Id);
+            var totalCount = allArticles.Count();
+
+            // صفحه‌بندی
+            var pagedArticles = allArticles
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(a => new ArticleListDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Summary = a.Summary,
+                    ImageUrl = a.ImageUrl,
+                    CreateDate = a.CreateDate,
+                    ViewCount = a.ViewCount,
+                    CategoryName = category.Name
+                });
+
+            return new PagedResult<ArticleListDto>
+            {
+                Items = pagedArticles,
+                Pagination = new PaginationDto
+                {
+                    CurrentPage = page,
+                    PageSize = pageSize,
+                    TotalCount = totalCount
+                }
+            };
+        }
     }
 }

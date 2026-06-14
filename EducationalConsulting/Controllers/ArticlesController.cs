@@ -13,19 +13,25 @@ namespace EducationalConsulting.Controllers
         }
 
         // نمایش لیست مقالات بر اساس دسته‌بندی
-        public async Task<IActionResult> ListByCategory(string categoryName)
+        public async Task<IActionResult> ListByCategory(string categoryName, int page = 1)
         {
             if (string.IsNullOrEmpty(categoryName))
             {
                 return NotFound();
             }
 
-            var articles = await _articleService.GetArticlesByCategoryNameAsync(categoryName);
-
-            // ذخیره نام دسته برای نمایش در View
             ViewBag.CategoryName = categoryName;
+            ViewBag.CurrentPage = page;
 
-            return View(articles);
+            var result = await _articleService.GetPagedArticlesByCategoryNameAsync(categoryName, page, 10);
+
+            if (!result.Items.Any() && page > 1)
+            {
+                // اگه صفحه خالی بود و صفحه اول نبود، برو به صفحه اول
+                return RedirectToAction("ListByCategory", new { categoryName, page = 1 });
+            }
+
+            return View(result);
         }
 
         // نمایش جزئیات یک مقاله

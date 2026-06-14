@@ -83,3 +83,16 @@
 .with-sidebar .col-md-9 {
     order: 0;
 }
+.with-sidebar-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.sidebar-col {
+    order: 1;
+}
+
+.content-col {
+    order: 0;
+}

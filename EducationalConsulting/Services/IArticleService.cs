@@ -12,5 +12,7 @@ namespace EducationalConsulting.Services
         Task IncrementViewCountAsync(int id);
         Task<IEnumerable<AdminArticlesViewModel>> GetAdminArticlesAsync();
         Task<IEnumerable<ArticleListDto>> GetLatestArticlesAsync(int count);  // ← این خط جدید
+        Task<PagedResult<ArticleListDto>> GetPagedArticlesByCategoryNameAsync(string categoryName, int page, int pageSize = 10);
+
     }
 }

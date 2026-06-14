@@ -1,65 +1,109 @@
-﻿@model IEnumerable<EducationalConsulting.DTOs.ArticleListDto>
+﻿@model EducationalConsulting.DTOs.PagedResult<EducationalConsulting.DTOs.ArticleListDto>
 @{
     Layout = "_Layout";
     ViewData["Title"] = $"مقالات {ViewBag.CategoryName}";
 }
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="text-center mb-5" style="color: #dbc64c;">مقالات @ViewBag.CategoryName</h1>
-        </div>
+<div class="category-header mb-4">
+    <h1 class="text-center" style="color: #dbc64c;">مقالات @ViewBag.CategoryName</h1>
+    <p class="text-center text-muted">مهم‌ترین مقالات آموزشی در دسته @ViewBag.CategoryName</p>
+</div>
+
+@if (!Model.Items.Any())
+{
+    <div class="alert alert-info text-center">
+        <h4>هیچ مقاله‌ای در این دسته یافت نشد.</h4>
+        <p>به زودی مقالات جدید اضافه خواهند شد.</p>
+    </div>
+}
+else
+{
+    <div class="articles-list">
+        @foreach (var article in Model.Items)
+        {
+            <div class="article-item mb-4 p-3 border-bottom">
+                <div class="row">
+                    @if (!string.IsNullOrEmpty(article.ImageUrl))
+                    {
+                        <div class="col-md-3">
+                            <img src="@article.ImageUrl" alt="@article.Title" class="img-fluid rounded" style="height: 120px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col-md-9">
+                            <h3><a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="text-decoration-none" style="color: #270b60;">@article.Title</a></h3>
+                            <p class="text-muted">@(article.Summary?.Length > 150 ? article.Summary.Substring(0, 150) + "..." : article.Summary)</p>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted"><i class="fa fa-calendar"></i> @article.CreateDate.ToString("yyyy/MM/dd")</small>
+                                <small class="text-muted"><i class="fa fa-eye"></i> @article.ViewCount بازدید</small>
+                                <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-sm btn-warning">مشاهده مقاله</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <h3><a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="text-decoration-none" style="color: #270b60;">@article.Title</a></h3>
+                            <p class="text-muted">@(article.Summary?.Length > 200 ? article.Summary.Substring(0, 200) + "..." : article.Summary)</p>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted"><i class="fa fa-calendar"></i> @article.CreateDate.ToString("yyyy/MM/dd")</small>
+                                <small class="text-muted"><i class="fa fa-eye"></i> @article.ViewCount بازدید</small>
+                                <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-sm btn-warning">مشاهده مقاله</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
     </div>
 
-    @if (!Model.Any())
+    <!-- صفحه‌بندی -->
+    @if (Model.Pagination.TotalPages > 1)
     {
-        <div class="alert alert-info text-center">
-            <h4>هیچ مقاله‌ای در این دسته یافت نشد.</h4>
-            <p>به زودی مقالات جدید اضافه خواهند شد.</p>
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            @foreach (var article in Model)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        @if (!string.IsNullOrEmpty(article.ImageUrl))
+        <div class="pagination-container text-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    @if (Model.Pagination.HasPrevious)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("ListByCategory", new { categoryName = ViewBag.CategoryName, page = Model.Pagination.CurrentPage - 1 })">
+                                <i class="fa fa-arrow-right"></i> قبلی
+                            </a>
+                        </li>
+                    }
+
+                    @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
+                    {
+                        if (i == Model.Pagination.CurrentPage)
                         {
-                            <img src="@article.ImageUrl" class="card-img-top" alt="@article.Title" style="height: 200px; object-fit: cover;">
+                            <li class="page-item active"><span class="page-link" style="background-color: #dbc64c; border-color: #dbc64c;">@i</span></li>
                         }
                         else
                         {
-                            <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
-                                <span class="text-white">بدون عکس</span>
-                            </div>
+                            <li class="page-item"><a class="page-link" href="@Url.Action("ListByCategory", new { categoryName = ViewBag.CategoryName, page = i })">@i</a></li>
                         }
-                        <div class="card-body">
-                            <h5 class="card-title">@article.Title</h5>
-                            <p class="card-text text-muted">@(article.Summary?.Length > 100 ? article.Summary.Substring(0, 100) + "..." : article.Summary)</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">@article.CreateDate.ToString("yyyy/MM/dd")</small>
-                                <small class="text-muted"><i class="fa fa-eye"></i> @article.ViewCount</small>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-warning w-100">مشاهده مقاله</a>
-                        </div>
-                    </div>
-                </div>
-            }
+                    }
+
+                    @if (Model.Pagination.HasNext)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("ListByCategory", new { categoryName = ViewBag.CategoryName, page = Model.Pagination.CurrentPage + 1 })">
+                                بعدی <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
         </div>
     }
-</div>
+}
 
 <style>
-    .card {
-        transition: transform 0.3s ease;
+    .article-item {
+        transition: all 0.3s ease;
     }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .article-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(-5px);
         }
 
     .btn-warning {
@@ -71,4 +115,14 @@
         .btn-warning:hover {
             background-color: #c4b03b;
         }
+
+    .page-link {
+        color: #270b60;
+    }
+
+    .page-item.active .page-link {
+        background-color: #dbc64c !important;
+        border-color: #dbc64c !important;
+        color: #000 !important;
+    }
 </style>
