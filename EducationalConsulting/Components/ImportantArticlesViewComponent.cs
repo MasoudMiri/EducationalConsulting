@@ -12,9 +12,9 @@ namespace EducationalConsulting.Components
             _articleService = articleService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int count = 5)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var articles = await _articleService.GetLatestArticlesAsync(count);
+            var articles = await _articleService.GetLatestArticlesAsync(5);
             return View(articles);
         }
     }

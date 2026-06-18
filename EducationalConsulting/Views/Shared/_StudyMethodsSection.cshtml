@@ -1,0 +1,29 @@
+﻿<!-- بخش روش مطالعه اصولی دروس -->
+<div class="study-methods-section my-5">
+    <div class="text-center mb-4">
+        <h2 style="color: #270b60; font-weight: bold;">روش مطالعه اصولی دروس</h2>
+        <p class="text-muted">هر درس روش خواندن متفاوتی دارد</p>
+    </div>
+    <div class="row">
+        @{
+            var courses = new[] {
+                new { Name = "زیست", Icon = "fa-dna", Color = "#28a745" },
+                new { Name = "شیمی", Icon = "fa-flask", Color = "#17a2b8" },
+                new { Name = "ریاضی", Icon = "fa-calculator", Color = "#ffc107" },
+                new { Name = "فیزیک", Icon = "fa-atom", Color = "#dc3545" }
+                };
+        }
+        @foreach (var course in courses)
+        {
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="course-card text-center p-3" style="border: 2px solid @course.Color; border-radius: 10px;">
+                    <i class="fas @course.Icon fa-2x" style="color: @course.Color;"></i>
+                    <h5 class="mt-2">@course.Name</h5>
+                    <button class="btn btn-sm mt-2" style="background-color: @course.Color; color: white; border: none;">
+                        کلیک کنید
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

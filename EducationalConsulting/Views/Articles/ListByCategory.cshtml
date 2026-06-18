@@ -4,9 +4,10 @@
     ViewData["Title"] = $"مقالات {ViewBag.CategoryName}";
 }
 
-<div class="category-header mb-4">
-    <h1 class="text-center" style="color: #dbc64c;">مقالات @ViewBag.CategoryName</h1>
-    <p class="text-center text-muted">مهم‌ترین مقالات آموزشی در دسته @ViewBag.CategoryName</p>
+<!-- فقط یک کادر (کادر پایینی) -->
+<div class="category-header mb-4" style="background: #270b60; padding: 40px 20px; border-radius: 15px;">
+    <h1 class="text-center" style="color: #dbc64c; font-weight: bold;">مقالات @ViewBag.CategoryName</h1>
+    <p class="text-center" style="color: rgba(255,255,255,0.8);">مهم‌ترین مقالات آموزشی در دسته @ViewBag.CategoryName</p>
 </div>
 
 @if (!Model.Items.Any())
@@ -34,7 +35,7 @@ else
                             <div class="d-flex justify-content-between">
                                 <small class="text-muted"><i class="fa fa-calendar"></i> @article.CreateDate.ToString("yyyy/MM/dd")</small>
                                 <small class="text-muted"><i class="fa fa-eye"></i> @article.ViewCount بازدید</small>
-                                <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-sm btn-warning">مشاهده مقاله</a>
+                                <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-sm" style="background-color: #dbc64c; border: none; color: #000; border-radius: 20px;">مشاهده مقاله</a>
                             </div>
                         </div>
                     }
@@ -46,7 +47,7 @@ else
                             <div class="d-flex justify-content-between">
                                 <small class="text-muted"><i class="fa fa-calendar"></i> @article.CreateDate.ToString("yyyy/MM/dd")</small>
                                 <small class="text-muted"><i class="fa fa-eye"></i> @article.ViewCount بازدید</small>
-                                <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-sm btn-warning">مشاهده مقاله</a>
+                                <a href="@Url.Action("Details", "Articles", new { id = article.Id })" class="btn btn-sm" style="background-color: #dbc64c; border: none; color: #000; border-radius: 20px;">مشاهده مقاله</a>
                             </div>
                         </div>
                     }
@@ -74,7 +75,7 @@ else
                     {
                         if (i == Model.Pagination.CurrentPage)
                         {
-                            <li class="page-item active"><span class="page-link" style="background-color: #dbc64c; border-color: #dbc64c;">@i</span></li>
+                            <li class="page-item active"><span class="page-link" style="background-color: #270b60; border-color: #270b60; color: white;">@i</span></li>
                         }
                         else
                         {
@@ -106,23 +107,13 @@ else
             transform: translateX(-5px);
         }
 
-    .btn-warning {
-        background-color: #dbc64c;
-        border: none;
-        color: #000;
-    }
-
-        .btn-warning:hover {
-            background-color: #c4b03b;
-        }
-
     .page-link {
         color: #270b60;
     }
 
     .page-item.active .page-link {
-        background-color: #dbc64c !important;
-        border-color: #dbc64c !important;
-        color: #000 !important;
+        background-color: #270b60 !important;
+        border-color: #270b60 !important;
+        color: white !important;
     }
 </style>

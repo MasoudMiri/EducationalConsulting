@@ -224,21 +224,22 @@ button {
 .header_section {
     width: 100%;
     float: left;
-    background-image: url(../images/banner-bg.png);
+    /* background-image: url(../images/banner-bg.png); */
     height: auto;
-    background-size: 100%;
-}
+    /* background-size: cover; */
+    /* background-position: center center; */
 
 
-.logo {
+
+    .logo {
     width: 35%;
     float: left;
 }
 
 .bg-light {
     background-color: #fff !important;
-    border-bottom-left-radius: 80px;
-    border-bottom-right-radius: 80px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .navbar-light .navbar-nav .active>.nav-link,
@@ -1133,5 +1134,347 @@ textarea#comment::placeholder {
     .header_section {
         min-height: 50vh;
         background-position: 50% 0%;
+    }
+}
+
+.custom-header {
+    background: #270b60;
+    padding: 8px 0;
+    border-bottom: 3px solid #dbc64c;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+    /* لوگو و نوشته کنارش */
+    .custom-header .logo-wrapper {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .custom-header .logo-img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 2px solid #dbc64c;
+        padding: 3px;
+        transition: all 0.3s ease;
+    }
+
+        .custom-header .logo-img:hover {
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+
+    .custom-header .logo-text {
+        color: #dbc64c;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* دکمه همبرگر */
+    .custom-header .navbar-toggler {
+        border-color: #dbc64c;
+    }
+
+    .custom-header .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23dbc64c' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* آیتم‌های منو */
+    .custom-header .nav-link {
+        color: #ffffff !important;
+        font-size: 14px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        margin: 0 2px;
+    }
+
+        .custom-header .nav-link:hover {
+            background-color: rgba(219, 198, 76, 0.15);
+            color: #dbc64c !important;
+            transform: translateY(-1px);
+        }
+
+    /* آیتم فعال منو */
+    .custom-header .nav-item.active .nav-link {
+        background-color: #dbc64c !important;
+        color: #270b60 !important;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(219, 198, 76, 0.3);
+    }
+
+    /* منوی کشویی */
+    .custom-header .dropdown-menu {
+        background: #270b60;
+        border: 1px solid #dbc64c;
+        border-radius: 10px;
+        padding: 8px 0;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        min-width: 180px;
+    }
+
+    .custom-header .dropdown-item {
+        color: #ffffff;
+        padding: 8px 20px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        border-radius: 0;
+    }
+
+        .custom-header .dropdown-item:hover {
+            background-color: #dbc64c !important;
+            color: #270b60 !important;
+            padding-right: 25px;
+        }
+
+    /* دکمه ورود */
+    .custom-header .login-btn {
+        color: #dbc64c;
+        font-size: 14px;
+        padding: 6px 22px;
+        border: 2px solid #dbc64c;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+        font-weight: 500;
+    }
+
+        .custom-header .login-btn:hover {
+            background-color: #dbc64c;
+            color: #270b60;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 12px rgba(219, 198, 76, 0.3);
+        }
+
+    /* آیکون جستجو */
+    .custom-header .search-icon {
+        color: #ffffff;
+        font-size: 18px;
+        transition: all 0.3s ease;
+    }
+
+        .custom-header .search-icon:hover {
+            color: #dbc64c;
+            transform: scale(1.1);
+        }
+
+/* ============================================================
+   HEADER RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 991px) {
+    .custom-header .navbar-nav {
+        padding-top: 15px;
+    }
+
+    .custom-header .nav-link {
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .custom-header .login-btn {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .custom-header .d-flex.align-items-center {
+        flex-direction: column;
+        gap: 10px !important;
+        width: 100%;
+    }
+
+    .custom-header .search-icon {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-header .logo-text {
+        font-size: 15px;
+    }
+
+    .custom-header .logo-img {
+        width: 45px;
+        height: 45px;
+    }
+}
+/* ============================================================
+   HEADER NEW STYLES
+   ============================================================ */
+
+/* هدر اصلی */
+.custom-header {
+    background: #270b60;
+    padding: 8px 0;
+    border-bottom: 3px solid #dbc64c;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+    /* لوگو و نوشته کنارش */
+    .custom-header .logo-wrapper {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .custom-header .logo-img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 2px solid #dbc64c;
+        padding: 3px;
+        transition: all 0.3s ease;
+    }
+
+        .custom-header .logo-img:hover {
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+
+    .custom-header .logo-text {
+        color: #dbc64c;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* دکمه همبرگر */
+    .custom-header .navbar-toggler {
+        border-color: #dbc64c;
+    }
+
+    .custom-header .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23dbc64c' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* آیتم‌های منو */
+    .custom-header .nav-link {
+        color: #ffffff !important;
+        font-size: 14px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        margin: 0 2px;
+    }
+
+        .custom-header .nav-link:hover {
+            background-color: rgba(219, 198, 76, 0.15);
+            color: #dbc64c !important;
+            transform: translateY(-1px);
+        }
+
+    /* آیتم فعال منو */
+    .custom-header .nav-item.active .nav-link {
+        background-color: #dbc64c !important;
+        color: #270b60 !important;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(219, 198, 76, 0.3);
+    }
+
+    /* منوی کشویی */
+    .custom-header .dropdown-menu {
+        background: #270b60;
+        border: 1px solid #dbc64c;
+        border-radius: 10px;
+        padding: 8px 0;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        min-width: 180px;
+    }
+
+    .custom-header .dropdown-item {
+        color: #ffffff;
+        padding: 8px 20px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        border-radius: 0;
+    }
+
+        .custom-header .dropdown-item:hover {
+            background-color: #dbc64c !important;
+            color: #270b60 !important;
+            padding-right: 25px;
+        }
+
+    /* دکمه ورود */
+    .custom-header .login-btn {
+        color: #dbc64c;
+        font-size: 14px;
+        padding: 6px 22px;
+        border: 2px solid #dbc64c;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+        font-weight: 500;
+    }
+
+        .custom-header .login-btn:hover {
+            background-color: #dbc64c;
+            color: #270b60;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 12px rgba(219, 198, 76, 0.3);
+        }
+
+    /* آیکون جستجو */
+    .custom-header .search-icon {
+        color: #ffffff;
+        font-size: 18px;
+        transition: all 0.3s ease;
+    }
+
+        .custom-header .search-icon:hover {
+            color: #dbc64c;
+            transform: scale(1.1);
+        }
+
+/* ============================================================
+   HEADER RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 991px) {
+    .custom-header .navbar-nav {
+        padding-top: 15px;
+    }
+
+    .custom-header .nav-link {
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .custom-header .login-btn {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .custom-header .d-flex.align-items-center {
+        flex-direction: column;
+        gap: 10px !important;
+        width: 100%;
+    }
+
+    .custom-header .search-icon {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-header .logo-text {
+        font-size: 15px;
+    }
+
+    .custom-header .logo-img {
+        width: 45px;
+        height: 45px;
     }
 }

@@ -1,49 +1,103 @@
-﻿<div class="footer_section">
+﻿<footer style="background: #0f0f1a; color: #e0e0e0; padding: 50px 0 0 0; margin-top: 60px; border-top: 5px solid #dbc64c; font-family: 'Vazir', 'Tahoma', sans-serif;">
     <div class="container">
-        <h1 class="touch_text">مشاوره رایگان</h1>
-        <div class="email_box">
-            <div class="input_main">
-                <form asp-action="SubmitContact" asp-controller="Home" method="post">
-                    <div class="form-group">
-                        <input type="text" class="email-bt" placeholder="نام و نام خانوادگی" name="Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="email-bt" placeholder="موبایل" name="Phone">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="massage-bt" placeholder="مقطع تحصیلی" rows="5" name="Message"></textarea>
-                    </div>
-                    <div class="send_bt">
-                        <button type="submit">ارسال</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="call_main">
-            <div class="call_text">
-                <img src="~/images/call-icon.png">
-                <span class="padding_left_15">+989368919159</span>
-            </div>
-            <div class="call_text">
-                <img src="~/images/mail-icon.png">
-                <span class="padding_left_15">sarayaghoobinezhad@gmail.com</span>
-            </div>
-        </div>
-        <div class="social_icon">
-            <ul>
-                <li><a href="#"><img src="~/images/fb-icon.png" alt="Facebook"></a></li>
-                <li><a href="#"><img src="~/images/twitter-icon.png" alt="Twitter"></a></li>
-                <li><a href="#"><img src="~/images/linkedin-icon.png" alt="LinkedIn"></a></li>
-                <li><a href="#"><img src="~/images/instagram-icon.png" alt="Instagram"></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 
-<div class="copyright_section">
-    <div class="container">
-        <p class="copyright_text">
-            @DateTime.Now.Year All Rights Reserved. Design by <a href="http://html.design">Free Html Templates</a>
-        </p>
+        <!-- ========== بخش بالایی فوتر (خبرنامه) ========== -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h3 style="color: #dbc64c; font-weight: bold; font-size: 24px; margin-bottom: 8px;">
+                    📬 اطلاع از آخرین اخبار و تخفیفات
+                </h3>
+                <p style="color: #aaa; font-size: 14px; margin-bottom: 20px;">
+                    برای دریافت مشاوره رایگان و اطلاع از تخفیف‌های ویژه، شماره خود را وارد کنید.
+                </p>
+                <div class="input-group" style="max-width: 500px; margin: 0 auto; direction: rtl;">
+                    <input type="text" class="form-control" placeholder="شماره موبایل خود را وارد کنید..."
+                           style="border-radius: 30px 0 0 30px; border: 2px solid #dbc64c; padding: 12px 20px; background: #1a1a2e; color: #fff;">
+                    <button class="btn" style="background: #dbc64c; color: #0f0f1a; border-radius: 0 30px 30px 0; padding: 12px 25px; font-weight: bold; border: 2px solid #dbc64c; transition: 0.3s;">
+                        <i class="fas fa-arrow-left"></i> ثبت
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border-color: #2a2a3e;">
+
+        <!-- ========== بخش اصلی فوتر (۴ ستونه) ========== -->
+        <div class="row text-center text-md-right" style="padding: 30px 0;">
+
+            <!-- ستون ۱: درباره ما -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #dbc64c; font-weight: bold; font-size: 18px; margin-bottom: 20px; border-bottom: 2px solid #dbc64c; display: inline-block; padding-bottom: 5px;">
+                    درباره ما
+                </h5>
+                <p style="font-size: 14px; line-height: 1.8; color: #aaa;">
+                    گروه مشاورین <strong style="color: #dbc64c;">SaLi</strong> با بیش از ۱۰ سال تجربه در زمینه مشاوره تحصیلی و آموزشی، همراه شما در مسیر موفقیت است.
+                </p>
+                <div style="margin-top: 15px;">
+                    <span style="background: #dbc64c; color: #0f0f1a; padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">★ رتبه برتر</span>
+                </div>
+            </div>
+
+            <!-- ستون ۲: لینک‌های سریع -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #dbc64c; font-weight: bold; font-size: 18px; margin-bottom: 20px; border-bottom: 2px solid #dbc64c; display: inline-block; padding-bottom: 5px;">
+                    لینک‌های سریع
+                </h5>
+                <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 2.4;">
+                    <li><a href="#" style="color: #ccc; text-decoration: none; transition: 0.3s;"><i class="fas fa-angle-left" style="color: #dbc64c; margin-left: 8px;"></i>صفحه اصلی</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none; transition: 0.3s;"><i class="fas fa-angle-left" style="color: #dbc64c; margin-left: 8px;"></i>لیست خدمات</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none; transition: 0.3s;"><i class="fas fa-angle-left" style="color: #dbc64c; margin-left: 8px;"></i>لیست مقالات</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none; transition: 0.3s;"><i class="fas fa-angle-left" style="color: #dbc64c; margin-left: 8px;"></i>تماس با ما</a></li>
+                </ul>
+            </div>
+
+            <!-- ستون ۳: اطلاعات تماس -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #dbc64c; font-weight: bold; font-size: 18px; margin-bottom: 20px; border-bottom: 2px solid #dbc64c; display: inline-block; padding-bottom: 5px;">
+                    تماس با ما
+                </h5>
+                <div style="font-size: 14px; line-height: 2.4;">
+                    <p><i class="fas fa-phone" style="color: #dbc64c; width: 25px;"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                    <p><i class="fas fa-mobile-alt" style="color: #dbc64c; width: 25px;"></i> ۰۹۱۲۳۴۵۶۷۸۹</p>
+                    <p><i class="fas fa-envelope" style="color: #dbc64c; width: 25px;"></i> info@SaLi.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: #dbc64c; width: 25px;"></i> تهران، خیابان ولیعصر</p>
+                </div>
+            </div>
+
+            <!-- ستون ۴: شبکه‌های اجتماعی و ساعات کاری -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #dbc64c; font-weight: bold; font-size: 18px; margin-bottom: 20px; border-bottom: 2px solid #dbc64c; display: inline-block; padding-bottom: 5px;">
+                    ما را دنبال کنید
+                </h5>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px;">
+                    <a href="#" style="color: #ccc; font-size: 22px; transition: 0.3s; background: #1a1a2e; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.color='#dbc64c'; this.style.background='#2a2a4e';" onmouseout="this.style.color='#ccc'; this.style.background='#1a1a2e';">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" style="color: #ccc; font-size: 22px; transition: 0.3s; background: #1a1a2e; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.color='#dbc64c'; this.style.background='#2a2a4e';" onmouseout="this.style.color='#ccc'; this.style.background='#1a1a2e';">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" style="color: #ccc; font-size: 22px; transition: 0.3s; background: #1a1a2e; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.color='#dbc64c'; this.style.background='#2a2a4e';" onmouseout="this.style.color='#ccc'; this.style.background='#1a1a2e';">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" style="color: #ccc; font-size: 22px; transition: 0.3s; background: #1a1a2e; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none;" onmouseover="this.style.color='#dbc64c'; this.style.background='#2a2a4e';" onmouseout="this.style.color='#ccc'; this.style.background='#1a1a2e';">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <div style="font-size: 13px; color: #888; text-align: center;">
+                    <p><i class="fas fa-clock" style="color: #dbc64c;"></i> ساعات کاری:</p>
+                    <p style="margin-top: -10px;">شنبه تا پنجشنبه ۹ الی ۲۰</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== کپی‌رایت ========== -->
+        <hr style="border-color: #2a2a3e;">
+        <div class="text-center" style="font-size: 13px; color: #777; padding: 15px 0 20px 0;">
+            <i class="fas fa-copyright" style="color: #dbc64c;"></i>
+            @DateTime.Now.Year تمامی حقوق برای <strong style="color: #dbc64c;">گروه مشاورین SaLi</strong> محفوظ است.
+            <br>
+            <span style="font-size: 11px; color: #555;">طراحی و توسعه توسط تیم SaLi</span>
+        </div>
+
     </div>
-</div>
+</footer>

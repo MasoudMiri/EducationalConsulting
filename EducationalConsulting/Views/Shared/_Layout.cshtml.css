@@ -1,48 +1,70 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿<!DOCTYPE html >
+<html lang="fa" dir="rtl" >
+<head >
+<meta charset="utf-8" / >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" / >
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+<meta name="language" content="fa" >
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
+<title > @ViewData["Title"] - گروه مشاورین SaLi</title >
 
-a {
-  color: #0077cc;
-}
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" >
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" >
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+<link rel="stylesheet" type="text/css" href="~/css/style.css" >
+<link rel="stylesheet" href="~/css/responsive.css" >
+<link rel="stylesheet" href="~/css/jquery.mCustomScrollbar.min.css" >
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" >
+<link rel="stylesheet" href="~/css/owl.theme.default.min.css" >
+<link rel="stylesheet" href="~/css/rtl-custom.css" >
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+<link rel="icon" href="~/images/fevicon.png" type="image/gif" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" >
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+@await RenderSectionAsync("Styles", required: false)
+</head >
+<body >
+<!-- ========== HEADER ========== -->
+<partial name="_Header" / >
+<!-- ========== MAIN CONTENT ========== -->
+@ {
+    var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["Action"]?.ToString();
+    var isAdminPage = controller == "Admin";
+    var isHomePage = controller == "Home" && action == "Index";
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+<main role="main" >
+<div class="container" >
+@if (isAdminPage || isHomePage) {
+    <div class="row"> <div class="col-12"> @RenderBody() </div> </div>
 }
+
+else {
+    <div class="row"> <div class="col-md-3"> @await Component.InvokeAsync("ImportantArticles") </div> <div class="col-md-9"> @RenderBody() </div> </div>
+}
+
+</div >
+</main >
+<!-- ========== بخش‌های ثابت (فقط برای صفحات غیر از صفحه اصلی و پنل ادمین) ========== -->
+@if (!isAdminPage && !isHomePage) {
+    <div class="container"> <partial name="_ServicesSection" /> <partial name="_HowToRankSection" /> <partial name="_StudyMethodsSection" /> <partial name="_TestimonialsSection" /> <partial name="_NewsletterSection" /> </div>
+}
+
+<!-- ========== FOOTER ========== -->
+<partial name="_Footer" / >
+<!-- ========== SCRIPTS ========== -->
+<script src="~/js/jquery.min.js" > </script >
+<script src="~/js/popper.min.js" > </script >
+<script src="~/js/bootstrap.bundle.min.js" > </script >
+<script src="~/js/jquery-3.0.0.min.js" > </script >
+<script src="~/js/plugin.js" > </script >
+<script src="~/js/jquery.mCustomScrollbar.concat.min.js" > </script >
+<script src="~/js/custom.js" > </script >
+<script src="~/js/owl.carousel.js" > </script >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" > </script >
+
+@await RenderSectionAsync("Scripts", required: false)
+</body >
+</html >

@@ -3,140 +3,20 @@
     ViewData["Title"] = "گروه مشاورین SaLi";
 }
 
-<!-- Language Section -->
-<div class="language_section layout_padding">
-    <div class="container">
-        <h1 class="language_taital">رتبه شو...</h1>
-        <h1 class="language_taital_1">خدمات ما </h1>
-        <div class="language_section_2 layout_padding">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="box_main">
-                        <div class="icon_1"><img src="~/images/icon-1.png"></div>
-                        <h6 class="heavy_text">پکیج های مشاوره تخصصی</h6>
-                    </div>
-                    <div class="readmore_bt"><a href="#">معرفی پکیج ها  </a></div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="box_main active">
-                        <div class="icon_1"><img src="~/images/icon-2.png"></div>
-                        <h6 class="heavy_text">تدریس زیست</h6>
-                    </div>
-                    <div class="readmore_bt active"><a href="#">شروع زیست 100%</a></div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="box_main">
-                        <div class="icon_1"><img src="~/images/icon-3.png"></div>
-                        <h6 class="heavy_text">مشاور خودت شو</h6>
-                    </div>
-                    <div class="readmore_bt"><a href="#">هرآنجه برای مشاور خودت شدن لازم دارید</a></div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="box_main">
-                        <div class="icon_1"><img src="~/images/icon-4.png"></div>
-                        <h6 class="heavy_text">انتخاب رشته تخصصی</h6>
-                    </div>
-                    <div class="readmore_bt"><a href="#">چرا انتخاب رشته مهم است ؟</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- ========== بخش رتبه شو / خدمات ما (با طراحی جدید) ========== -->
+<partial name="_ServicesSection" />
 
-<!-- Services Section -->
-<div class="services_section layout_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="language_taital">چگونه رتبه شویم ؟ </h1>
-                <h1 class="language_taital_1">برای شروع آماده اید ؟ </h1>
-                <p class="services_text">برعکس تصور عموم،رتبه شدن کار غیرممکنی نیست</p>
-                <div class="appoinment_bt"><a href="#">شروع کنید</a></div>
-            </div>
-            <div class="col-md-6">
-                <div class="image_1"><img src="~/images/img-1.png"></div>
-                <div class="image_2"><img src="~/images/img-2.png"></div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- ========== بخش چگونه رتبه شویم (با طراحی جدید) ========== -->
+<partial name="_HowToRankSection" />
 
-<!-- Gallery Section -->
-<div class="gallery_section layout_padding">
-    <div class="container">
-        <h1 class="gallery_taital"> مهم ترین مقالات</h1>
-        <div class="gallery_section_2 layout_padding">
-            <div id="main_slider" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="image_3">
-                                    <div class="play_icon_2"><a href="#"><img src="~/images/play-icon-2.png"></a></div>
-                                    <h6 class="language_text">تمام قوانین کنکور و نهایی اینجاست</h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="image_4">
-                                    <div class="play_icon_2"><a href="#"><img src="~/images/play-icon-2.png"></a></div>
-                                    <h6 class="language_text">معجزه منابع مهم کنکور چیستند؟</h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="image_5">
-                                    <div class="play_icon_2"><a href="#"><img src="~/images/play-icon-2.png"></a></div>
-                                    <h6 class="language_text">چگونه از ثانیه به ثانیه درس خواندن بهره ببریم</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-                    <i class="fa fa-arrow-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Courses Section -->
-<div class="courses_section layout_padding">
-    <div class="container">
-        <h1 class="courses_taital">روش مطالعه اصولی دروس </h1>
-        <p class="courses_text">هر درس روش خواندن متفاوتی دارد</p>
-        <div class="courses_section_2">
-            @{
-                var courses = new[] {
-                        new { Flag = "flag-1.png", Name = "زیست", Active = true },
-                        new { Flag = "flag-2.png", Name = "شیمی", Active = false },
-                        new { Flag = "flag-3.png", Name = "ریاضی", Active = false },
-                        new { Flag = "flag-4.png", Name = "فیزیک", Active = false },
-                       
-                        };
-            }
-            @foreach (var course in courses)
-            {
-                <div class="flag_main">
-                    <div class="flag_text">
-                        <img src="~/images/@course.Flag">
-                        <span class="padding_left_15">@course.Name</span>
-                    </div>
-                    <hr class="border_bg">
-                    <h6 class="learn_text @(course.Active ? "active" : "")">کلیک کنید</h6>
-                </div>
-            }
-        </div>
-    </div>
-</div>
+<!-- ========== بخش روش مطالعه اصولی دروس (با طراحی جدید) ========== -->
+<partial name="_StudyMethodsSection" />
 
 <!-- Students Section -->
 <div class="students_section layout_padding">
     <div class="container">
         <h1 class="courses_taital">نظرات کاربران</h1>
-        
+
         <div class="students_section_2 layout_padding">
             <div class="client_main">
                 <div class="client_left">
@@ -153,14 +33,4 @@
 </div>
 
 <!-- Newsletter Section -->
-<div class="container">
-    <div class="newsletter_section layout_padding">
-        <h1 class="newsletter_taital">اطلاع از آخرین اخبار کنکور و تخفیفات دوره ها</h1>
-        <div class="mail_main">
-            <input type="text" class="email_text" placeholder="شماره خود را وارد کنید " name="email">
-            <div class="left_arrow">
-                <a href="#"><img src="~/images/left-arrow.png"></a>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="_NewsletterSection" />

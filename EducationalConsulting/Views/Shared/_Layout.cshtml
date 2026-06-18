@@ -26,41 +26,22 @@
 </head>
 <body>
 
+    <!-- ========== HEADER ========== -->
     <partial name="_Header" />
 
-    <!-- عنوان صفحه (فقط برای صفحات غیر از صفحه اصلی و پنل ادمین) -->
+    <!-- ========== عنوان صفحه ========== -->
     @{
         var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
         var action = ViewContext.RouteData.Values["Action"]?.ToString();
         var isAdminPage = controller == "Admin";
         var isHomePage = controller == "Home" && action == "Index";
-        var showPageTitle = !isAdminPage && !isHomePage;
     }
 
-    @if (showPageTitle)
-    {
-        <div class="page-title-section" style="background: linear-gradient(135deg, #270b60 0%, #dbc64c 100%); padding: 60px 0; text-align: center; margin-bottom: 40px;">
-            <div class="container">
-                <h1 style="color: white; font-size: 48px; margin-bottom: 10px;">@ViewData["Title"]</h1>
-                <p style="color: rgba(255,255,255,0.8); font-size: 18px;">
-                    @if (controller == "Articles" && action == "ListByCategory")
-                    {
-                        @:لیست مقالات @ViewBag.CategoryName
-                    }
-                    else if (controller == "Articles" && action == "Details")
-                    {
-                        @:مشاهده مقاله
-                    }
-                </p>
-            </div>
-        </div>
-    }
-
+    <!-- ========== MAIN CONTENT ========== -->
     <main role="main">
         <div class="container">
             @if (isAdminPage || isHomePage)
             {
-                <!-- صفحه اصلی و پنل ادمین بدون سایدبار -->
                 <div class="row">
                     <div class="col-12">
                         @RenderBody()
@@ -69,12 +50,11 @@
             }
             else
             {
-                <!-- سایر صفحات با سایدبار سمت چپ -->
                 <div class="row">
-                    <div class="col-md-4 col-lg-3">
-                        @await Component.InvokeAsync("ImportantArticles", new { count = 5 })
+                    <div class="col-md-3">
+                        @await Component.InvokeAsync("ImportantArticles")
                     </div>
-                    <div class="col-md-8 col-lg-9">
+                    <div class="col-md-9">
                         @RenderBody()
                     </div>
                 </div>
@@ -82,8 +62,22 @@
         </div>
     </main>
 
+    <!-- ========== بخش‌های ثابت ========== -->
+    @if (!isAdminPage && !isHomePage)
+    {
+        <div class="container">
+            <partial name="_ServicesSection" />
+            <partial name="_HowToRankSection" />
+            <partial name="_StudyMethodsSection" />
+            <partial name="_TestimonialsSection" />
+            <partial name="_NewsletterSection" />
+        </div>
+    }
+
+    <!-- ========== FOOTER ========== -->
     <partial name="_Footer" />
 
+    <!-- ========== SCRIPTS ========== -->
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>

@@ -2,100 +2,80 @@
     var currentPage = ViewContext.RouteData.Values["Controller"]?.ToString();
 }
 
-<div class="header_section">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="logo">
-                <a href="@Url.Action("Index", "Home")">
-                    <img src="~/images/logo3.png" alt="Logo" style="width: 90px; height: 90px;">
-                </a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
+<div style="background: #270b60; border-bottom: 3px solid #dbc64c; padding: 10px 0;">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg" style="background: transparent; padding: 0;">
+
+            <!-- لوگو + اسم سایت -->
+            <a href="@Url.Action("Index", "Home")" style="display: flex; align-items: center; text-decoration: none; color: white;">
+                <img src="~/images/logo3.png" alt="Logo" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #dbc64c; padding: 2px; margin-left: 10px;">
+                <span style="color: #dbc64c; font-size: 18px; font-weight: bold;">گروه مشاورین SaLi</span>
+            </a>
+
+            <!-- دکمه هَمبرگر برای موبایل -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\" http: //www.w3.org/2000/svg\" viewBox=\"0 0 30 30\"><path stroke=\"%23dbc64c\" stroke-width=\"2\" d=\"M4 7h22M4 15h22M4 23h22\" /></svg>');"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+
+            <!-- منوها -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto" style="gap: 5px;">
+
                     <li class="nav-item @(currentPage == "Home" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index", "Home")">صحفه اصلی</a>
+                        <a class="nav-link" href="@Url.Action("Index", "Home")" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px; @(currentPage == "Home" ? "background-color: #dbc64c; color: #270b60; font-weight: bold;" : "")">صفحه اصلی</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Languages")">لیست خدمات</a>
+                        <a class="nav-link" href="#" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px;">لیست خدمات</a>
                     </li>
-                    
-                    <!-- منوی کشویی لیست مقالات - شروع -->
+
                     <li class="nav-item dropdown @(currentPage == "Articles" ? "active" : "")">
-                        <a class="nav-link dropdown-toggle" href="#" id="articlesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            لیست مقالات
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="articlesDropdown">
-                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "عمومی" })">مقالات عمومی</a>
-                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "ریاضی" })">مقالات ریاضی</a>
-                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "پزشکی" })">مقالات پزشکی</a>
-                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "انسانی" })">مقالات انسانی</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="articlesDropdown" role="button" data-toggle="dropdown" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px; @(currentPage == "Articles" ? "background-color: #dbc64c; color: #270b60; font-weight: bold;" : "")">لیست مقالات</a>
+                        <div class="dropdown-menu" style="background: #270b60; border: 1px solid #dbc64c;">
+                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "عمومی" })" style="color: white;">مقالات عمومی</a>
+                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "ریاضی" })" style="color: white;">مقالات ریاضی</a>
+                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "پزشکی" })" style="color: white;">مقالات پزشکی</a>
+                            <a class="dropdown-item" href="@Url.Action("ListByCategory", "Articles", new { categoryName = "انسانی" })" style="color: white;">مقالات انسانی</a>
                         </div>
                     </li>
-                    <!-- منوی کشویی لیست مقالات - پایان -->
-                    
+
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Events")">مشاوره رایگان</a>
+                        <a class="nav-link" href="#" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px;">مشاوره رایگان</a>
                     </li>
-                    <li class="nav-item @(currentPage == "Contact" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index", "Contact")">همکاری بـا مـا</a>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px;">همکاری با ما</a>
                     </li>
-                    <li class="nav-item @(currentPage == "Contact" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index", "Contact")">مشاور خودت شو</a>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px;">مشاور خودت شو</a>
                     </li>
-                    
-                    <!-- پنل مدیریت - شروع -->
+
                     <li class="nav-item @(currentPage == "Admin" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Login", "Admin")">پنل مدیریت</a>
+                        <a class="nav-link" href="@Url.Action("Login", "Admin")" style="color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px; @(currentPage == "Admin" ? "background-color: #dbc64c; color: #270b60; font-weight: bold;" : "")">پنل مدیریت</a>
                     </li>
-                    <!-- پنل مدیریت - پایان -->
-                    
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <div class="login_text">
-                        <a href="@Url.Action("Login", "Account")">ورود</a>
-                    </div>
-                    <div class="search_icon">
-                        <a href="#"><img src="~/images/search-icon.png" alt="Search"></a>
-                    </div>
-                </form>
+
+                <!-- ورود و جستجو -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <a href="@Url.Action("Login", "Account")" style="color: #dbc64c; border: 2px solid #dbc64c; padding: 5px 20px; border-radius: 25px; font-size: 14px; text-decoration: none; transition: 0.3s;">ورود</a>
+                    <a href="#" style="color: white; font-size: 16px;">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
             </div>
         </nav>
     </div>
-
-    <!-- فقط در صفحه اصلی بنر نمایش داده شود -->
-    @if (currentPage == "Home")
-    {
-        <div class="banner_section layout_padding">
-            <div class="container">
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <p class="banner_text">مشاوره تخصصی</p>
-                            <h1 class="banner_taital">گروه مشاورین SaLi</h1>
-                            <div class="read_bt"><a href="#">آشنایی با ما </a></div>
-                        </div>
-                        <div class="carousel-item">
-                            <p class="banner_text">مشاوره تخصصی</p>
-                            <h1 class="banner_taital">گروه مشاورین SaLi</h1>
-                            <div class="read_bt"><a href="#">آشنایی با ما</a></div>
-                        </div>
-                        <div class="carousel-item">
-                            <p class="banner_text">مشاوره تخصصی</p>
-                            <h1 class="banner_taital">گروه مشاورین SaLi</h1>
-                            <div class="read_bt"><a href="#">آشنایی با ما</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="play_icon">
-                <a href="#"><img src="~/images/play-icon.png" alt="Play"></a>
-            </div>
-        </div>
-    }
 </div>
+
+<!-- بنر (فقط صفحه اصلی) -->
+@if (currentPage == "Home")
+{
+    <div style="background: #270b60; padding: 40px 0;">
+        <div class="container text-center">
+            <p style="color: #dbc64c; font-size: 18px; font-weight: bold;">مشاوره تخصصی</p>
+            <h1 style="color: white; font-size: 42px; font-weight: bold;">گروه مشاورین SaLi</h1>
+            <a href="#" style="display: inline-block; margin-top: 20px; color: #dbc64c; border: 2px solid #dbc64c; padding: 8px 30px; border-radius: 25px; text-decoration: none;">آشنایی با ما</a>
+        </div>
+    </div>
+}
