@@ -1,115 +1,140 @@
-﻿using EducationalConsulting.DTOs;
+﻿using Microsoft.AspNetCore.Mvc;
 using EducationalConsulting.Services;
-using Microsoft.AspNetCore.Mvc;
+using EducationalConsulting.DTOs;
 
-public class AdminController : Controller
+namespace EducationalConsulting.Controllers
 {
-    private readonly IAdminService _adminService;
-
-    public AdminController(IAdminService adminService)
+    public class AdminController : Controller
     {
-        _adminService = adminService;
-    }
+        private readonly IAdminService _adminService;
+        private readonly IAuthService _authService;
 
-    public IActionResult Login() => View();
-
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginDto model)
-    {
-        if (await _adminService.LoginAsync(model, HttpContext.Session))
-            return RedirectToAction("Index");
-
-        ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است";
-        return View(model);
-    }
-
-    public IActionResult Logout()
-    {
-        _adminService.Logout(HttpContext.Session);
-        return RedirectToAction("Login");
-    }
-
-    public async Task<IActionResult> Index()
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return RedirectToAction("Login");
-        return View();
-    }
-
-    public async Task<IActionResult> Articles()
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return RedirectToAction("Login");
-
-        var articles = await _adminService.GetAllArticlesForAdminAsync();
-        return View(articles);
-    }
-
-    public async Task<IActionResult> CreateArticle()
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return RedirectToAction("Login");
-
-        ViewBag.Categories = await _adminService.GetCategoriesAsync();
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> CreateArticle(ArticleCreateDto model)
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return RedirectToAction("Login");
-
-        var result = await _adminService.CreateArticleAsync(model);
-        if (result.Success)
+        public AdminController(IAdminService adminService, IAuthService authService)
         {
-            TempData["Success"] = result.Message;
-            return RedirectToAction("Articles");
+            _adminService = adminService;
+            _authService = authService;
         }
 
-        TempData["Error"] = result.Message;
-        ViewBag.Categories = await _adminService.GetCategoriesAsync();
-        return View(model);
-    }
-
-    public async Task<IActionResult> EditArticle(int id)
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return RedirectToAction("Login");
-
-        var result = await _adminService.GetArticleForEditAsync(id);
-        if (!result.Success)
-            return NotFound();
-
-        ViewBag.Categories = await _adminService.GetCategoriesAsync();
-        return View(result.Data);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> EditArticle(ArticleUpdateDto model)
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return RedirectToAction("Login");
-
-        var result = await _adminService.UpdateArticleAsync(model);
-        if (result.Success)
+        // ========== احراز هویت ==========
+        public IActionResult Login()
         {
-            TempData["Success"] = result.Message;
-            return RedirectToAction("Articles");
+            if (_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Index");
+            return View();
         }
 
-        TempData["Error"] = result.Message;
-        ViewBag.Categories = await _adminService.GetCategoriesAsync();
-        return View(model);
-    }
+        [HttpPost]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            if (await _authService.LoginAsync(username, password, HttpContext.Session))
+                return RedirectToAction("Index");
 
-    [HttpPost]
-    public async Task<IActionResult> DeleteArticle(int id)
-    {
-        if (!await _adminService.IsLoggedInAsync(HttpContext.Session))
-            return Unauthorized();
+            ViewBag.Error = "نام کاربری یا رمز عبور اشتباه است";
+            return View();
+        }
 
-        var result = await _adminService.DeleteArticleAsync(id);
-        return Json(new { success = result.Success, message = result.Message });
+        public IActionResult Logout()
+        {
+            _authService.Logout(HttpContext.Session);
+            return RedirectToAction("Login");
+        }
+
+        // ========== پنل مدیریت ==========
+        public IActionResult Index()
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Login");
+            return View();
+        }
+
+        public async Task<IActionResult> Articles()
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Login");
+
+            var articles = await _adminService.GetAllArticlesForAdminAsync();
+            return View(articles);
+        }
+
+        // ========== مدیریت مقالات ==========
+        public async Task<IActionResult> CreateArticle()
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Login");
+
+            ViewBag.Categories = await _adminService.GetCategoriesAsync();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateArticle(ArticleCreateDto model)
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Login");
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _adminService.GetCategoriesAsync();
+                return View(model);
+            }
+
+            var result = await _adminService.CreateArticleAsync(model);
+            if (result.Success)
+            {
+                TempData["Success"] = result.Message;
+                return RedirectToAction("Articles");
+            }
+
+            TempData["Error"] = result.Message;
+            ViewBag.Categories = await _adminService.GetCategoriesAsync();
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditArticle(int id)
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Login");
+
+            var result = await _adminService.GetArticleForEditAsync(id);
+            if (!result.Success)
+                return NotFound();
+
+            ViewBag.Categories = await _adminService.GetCategoriesAsync();
+            return View(result.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditArticle(ArticleUpdateDto model)
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return RedirectToAction("Login");
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _adminService.GetCategoriesAsync();
+                return View(model);
+            }
+
+            var result = await _adminService.UpdateArticleAsync(model);
+            if (result.Success)
+            {
+                TempData["Success"] = result.Message;
+                return RedirectToAction("Articles");
+            }
+
+            TempData["Error"] = result.Message;
+            ViewBag.Categories = await _adminService.GetCategoriesAsync();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteArticle(int id)
+        {
+            if (!_authService.IsAdminLoggedIn(HttpContext.Session))
+                return Unauthorized();
+
+            var result = await _adminService.DeleteArticleAsync(id);
+            return Json(new { success = result.Success, message = result.Message });
+        }
     }
 }

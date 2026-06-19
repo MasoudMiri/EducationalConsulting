@@ -8,16 +8,16 @@ namespace EducationalConsulting.Services
     {
         private readonly IArticleRepository _articleRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IFileService _fileService;
 
         public ArticleService(
             IArticleRepository articleRepository,
             ICategoryRepository categoryRepository,
-            IWebHostEnvironment webHostEnvironment)
+            IFileService fileService)
         {
             _articleRepository = articleRepository;
             _categoryRepository = categoryRepository;
-            _webHostEnvironment = webHostEnvironment;
+            _fileService = fileService;
         }
 
         public async Task<IEnumerable<ArticleListDto>> GetArticlesByCategoryNameAsync(string categoryName)
@@ -70,7 +70,7 @@ namespace EducationalConsulting.Services
 
                 if (articleCreateDto.ImageFile != null)
                 {
-                    imagePath = await SaveImageAsync(articleCreateDto.ImageFile);
+                    imagePath = await _fileService.SaveImageAsync(articleCreateDto.ImageFile, "articles");
                 }
 
                 var article = new Article
@@ -106,9 +106,9 @@ namespace EducationalConsulting.Services
                 {
                     if (!string.IsNullOrEmpty(article.ImageUrl))
                     {
-                        DeleteOldImage(article.ImageUrl);
+                        _fileService.DeleteImage(article.ImageUrl);
                     }
-                    article.ImageUrl = await SaveImageAsync(articleUpdateDto.ImageFile);
+                    article.ImageUrl = await _fileService.SaveImageAsync(articleUpdateDto.ImageFile, "articles");
                 }
 
                 article.Title = articleUpdateDto.Title;
@@ -134,7 +134,7 @@ namespace EducationalConsulting.Services
                 var article = await _articleRepository.GetByIdAsync(id);
                 if (article != null && !string.IsNullOrEmpty(article.ImageUrl))
                 {
-                    DeleteOldImage(article.ImageUrl);
+                    _fileService.DeleteImage(article.ImageUrl);
                 }
                 await _articleRepository.DeleteAsync(id);
                 return true;
@@ -203,37 +203,6 @@ namespace EducationalConsulting.Services
                 .ToList();
         }
 
-        private async Task<string> SaveImageAsync(IFormFile imageFile)
-        {
-            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "articles");
-
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
-
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
-
-            return "/images/articles/" + uniqueFileName;
-        }
-
-        private void DeleteOldImage(string imagePath)
-        {
-            if (string.IsNullOrEmpty(imagePath))
-                return;
-
-            string fullPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath.TrimStart('/'));
-            if (File.Exists(fullPath))
-            {
-                File.Delete(fullPath);
-            }
-        }
         public async Task<PagedResult<ArticleListDto>> GetPagedArticlesByCategoryNameAsync(string categoryName, int page, int pageSize = 10)
         {
             var category = await _categoryRepository.GetByNameAsync(categoryName);
@@ -246,11 +215,9 @@ namespace EducationalConsulting.Services
                 };
             }
 
-            // گرفتن کل مقالات فعال این دسته
             var allArticles = await _articleRepository.GetActiveArticlesByCategoryIdAsync(category.Id);
             var totalCount = allArticles.Count();
 
-            // صفحه‌بندی
             var pagedArticles = allArticles
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)

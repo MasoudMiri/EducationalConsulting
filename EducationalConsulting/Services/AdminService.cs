@@ -1,7 +1,6 @@
 ﻿using EducationalConsulting.Data;
 using EducationalConsulting.DTOs;
 using EducationalConsulting.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace EducationalConsulting.Services
 {
@@ -9,39 +8,21 @@ namespace EducationalConsulting.Services
     {
         private readonly IArticleRepository _articleRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        private const string SessionKey = "AdminLoggedIn";
+        private readonly IFileService _fileService;
 
         public AdminService(
             IArticleRepository articleRepository,
             ICategoryRepository categoryRepository,
-            IWebHostEnvironment webHostEnvironment)
+            IFileService fileService)
         {
             _articleRepository = articleRepository;
             _categoryRepository = categoryRepository;
-            _webHostEnvironment = webHostEnvironment;
+            _fileService = fileService;
         }
 
-        public async Task<bool> IsLoggedInAsync(ISession session)
-        {
-            return await Task.FromResult(session.GetString(SessionKey) == "true");
-        }
-
-        public async Task<bool> LoginAsync(LoginDto model, ISession session)
-        {
-            // TODO: بعداً از دیتابیس بررسی کن
-            if (model.Username == "admin" && model.Password == "123456")
-            {
-                session.SetString(SessionKey, "true");
-                return await Task.FromResult(true);
-            }
-            return await Task.FromResult(false);
-        }
-
-        public void Logout(ISession session)
-        {
-            session.Remove(SessionKey);
-        }
+        // ============================================================
+        //  مدیریت مقالات
+        // ============================================================
 
         public async Task<IEnumerable<AdminArticlesViewModel>> GetAllArticlesForAdminAsync()
         {
@@ -72,7 +53,7 @@ namespace EducationalConsulting.Services
                 string imagePath = null;
                 if (model.ImageFile != null)
                 {
-                    imagePath = await SaveImageAsync(model.ImageFile);
+                    imagePath = await _fileService.SaveImageAsync(model.ImageFile, "articles");
                 }
 
                 var article = new Article
@@ -127,8 +108,8 @@ namespace EducationalConsulting.Services
                 if (model.ImageFile != null)
                 {
                     if (!string.IsNullOrEmpty(article.ImageUrl))
-                        DeleteOldImage(article.ImageUrl);
-                    article.ImageUrl = await SaveImageAsync(model.ImageFile);
+                        _fileService.DeleteImage(article.ImageUrl);
+                    article.ImageUrl = await _fileService.SaveImageAsync(model.ImageFile, "articles");
                 }
 
                 article.Title = model.Title;
@@ -153,7 +134,7 @@ namespace EducationalConsulting.Services
             {
                 var article = await _articleRepository.GetByIdAsync(id);
                 if (article != null && !string.IsNullOrEmpty(article.ImageUrl))
-                    DeleteOldImage(article.ImageUrl);
+                    _fileService.DeleteImage(article.ImageUrl);
 
                 await _articleRepository.DeleteAsync(id);
                 return ServiceResult.Ok("مقاله با موفقیت حذف شد");
@@ -164,6 +145,10 @@ namespace EducationalConsulting.Services
             }
         }
 
+        // ============================================================
+        //  مدیریت دسته‌بندی‌ها
+        // ============================================================
+
         public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
         {
             var categories = await _categoryRepository.GetAllAsync();
@@ -173,33 +158,6 @@ namespace EducationalConsulting.Services
                 Name = c.Name,
                 IsActive = c.IsActive
             });
-        }
-
-        private async Task<string> SaveImageAsync(IFormFile imageFile)
-        {
-            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "articles");
-            if (!Directory.Exists(uploadsFolder))
-                Directory.CreateDirectory(uploadsFolder);
-
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
-
-            return "/images/articles/" + uniqueFileName;
-        }
-
-        private void DeleteOldImage(string imagePath)
-        {
-            if (string.IsNullOrEmpty(imagePath))
-                return;
-
-            string fullPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath.TrimStart('/'));
-            if (File.Exists(fullPath))
-                File.Delete(fullPath);
         }
     }
 }

@@ -47,11 +47,7 @@
 
                     <div class="mb-3">
                         <label asp-for="Content" class="form-label">محتوا</label>
-                        <textarea asp-for="Content" class="form-control" rows="15" required placeholder="متن مقاله را اینجا بنویسید...
-                                  می‌توانید از تگ‌های HTML استفاده کنید:
-<p>برای پاراگراف</p>
-<strong>متن پررنگ</strong>
-<ul><li>لیست</li></ul>"></textarea>
+                        <textarea asp-for="Content" id="editor" class="form-control" rows="15" required></textarea>
                         <small class="text-muted">برای فرمت دهی می‌توانید از HTML استفاده کنید</small>
                     </div>
 
@@ -70,3 +66,16 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // راه‌اندازی CKEditor
+        CKEDITOR.replace('editor', {
+            language: 'fa',
+            contentsLangDirection: 'rtl',
+            height: 500,
+            filebrowserUploadUrl: '/Upload/UploadFile',
+            filebrowserImageUploadUrl: '/Upload/UploadFile'
+        });
+    </script>
+}

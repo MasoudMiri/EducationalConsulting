@@ -9,7 +9,10 @@ namespace YourProject.Controllers
             ViewData["Title"] = "Home - گروه مشاورین SaLi";
             return View();
         }
-
+        public IActionResult Test()
+        {
+            return View();
+        }
         public IActionResult About()
         {
             ViewData["Title"] = "About Us - Oinia Language School";

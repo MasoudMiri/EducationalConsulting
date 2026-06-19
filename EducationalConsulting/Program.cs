@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using EducationalConsulting.Data;
+﻿using EducationalConsulting.Data;
 using EducationalConsulting.Services;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,12 @@ builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100 MB
+});
 
 // اضافه کردن Session (این قسمت رو اضافه کن)
 builder.Services.AddDistributedMemoryCache();

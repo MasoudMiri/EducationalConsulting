@@ -26,5 +26,16 @@ namespace EducationalConsulting.Services
             // TODO: بعداً از دیتابیس بخون
             return username == "admin" && password == "123456";
         }
+
+        // متد جدید برای لاگین (یکجا)
+        public async Task<bool> LoginAsync(string username, string password, ISession session)
+        {
+            if (ValidateAdminLogin(username, password))
+            {
+                SetAdminLogin(session);
+                return await Task.FromResult(true);
+            }
+            return await Task.FromResult(false);
+        }
     }
 }
