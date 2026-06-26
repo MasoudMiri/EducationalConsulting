@@ -374,20 +374,20 @@ Articles (Many)
 ## 📸 Screenshots
 
 ### صفحه اصلی
-![Homepage 1](ScreenShots/homepage1.png)
-![Homepage 2](ScreenShots/homepage2.png)
-![Homepage 3](ScreenShots/homepage3.png)
-![Homepage 4](ScreenShots/homepage4.png)
+![Homepage 1](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/homepage1.png?raw=true)
+![Homepage 2](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/homepage2.png?raw=true)
+![Homepage 3](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/homepage3.png?raw=true)
+![Homepage 4](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/homepage4.png?raw=true)
 
 ### بخش مقالات
-![Articles 1](ScreenShots/articles1.png)
-![Articles 2](ScreenShots/articles2.png)
-![Articles 3](ScreenShots/articles3.png)
+![Articles 1](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/articles1.png?raw=true)
+![Articles 2](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/articles2.png?raw=true)
+![Articles 3](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/articles3.png?raw=true)
 
 ### پنل ادمین
-![Admin 1](ScreenShots/admin1.png)
-![Admin 2](ScreenShots/admin2.png)
-![Admin 3](ScreenShots/admin3.png)
+![Admin 1](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/admin1.png?raw=true)
+![Admin 2](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/admin2.png?raw=true)
+![Admin 3](https://github.com/MasoudMiri/EducationalConsulting/blob/main/EducationalConsulting/ScreenShots/admin3.png?raw=true)
 
 ---
 
