@@ -213,7 +213,6 @@ EducationalConsulting
 
 - **Version Control:** Git & GitHub
 - **IDE:** Visual Studio 2022
-- **API Testing:** Swagger/Postman
 
 ---
 
