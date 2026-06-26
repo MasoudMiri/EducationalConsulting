@@ -1,56 +1,51 @@
 ````markdown
 # EducationalConsulting
 
-A comprehensive educational consulting website built with **ASP.NET Core MVC**. This project provides
-a platform for educational consulting services, featuring article management, user authentication,
- and package-based content delivery.
+A comprehensive educational consulting website built with ASP.NET Core MVC. This project provides a platform for educational consulting services, featuring article management, user authentication, and package-based content delivery.
 
 ---
 
-# 📖 About The Project
+## 📖 About The Project
 
-EducationalConsulting is a web application designed for educational consulting services. It allows administrators
- to manage articles and content while providing users with access
-to educational materials based on their subscription packages.
+EducationalConsulting is a web application designed for educational consulting services. It allows administrators to manage articles and content while providing users with access to educational materials based on their subscription packages.
 
-> 🚧 **Current Status:** Under Active Development
+The project is currently under active development.
 
-**Current Progress:** **~60% Complete**
+**Current Progress:** ~60% completed
 
-## ✅ Completed Features
+### ✅ Completed Features
 
-- Full Article Management System (CRUD)
-- Secure Admin Panel Login
-- Article Category Management
-- CKEditor 4 Integration
-- Image & Video Upload
-- Responsive RTL Design
-- Dynamic Sidebar
-- Pagination
-- Blog-style Articles
+- Full article management system (CRUD)
+- Admin panel with secure login
+- Article categories management
+- CKEditor integration with file upload (images/videos)
+- Responsive RTL design with modern UI
+- Dynamic sidebar with latest articles
+- Pagination for article listing
+- Blog-style articles with multimedia support
 
-## ⏳ Planned Features
+### ⏳ Planned Features
 
-- User Authentication
-- Package Subscription System
-- User Dashboard
-- Payment Gateway
-- Comment System
-- User Management
+- User authentication system
+- Package-based subscription system
+- User dashboard
+- Payment gateway integration
+- Article commenting system
+- User management in admin panel
 
 ---
 
-# 🏗️ Project Architecture
+## 🏗️ Project Architecture
 
-| Layer | Responsibility |
-|--------|---------------|
-| **Repository** | Database access |
-| **Service** | Business logic |
-| **Controller** | Request handling |
-| **View** | UI (Razor Views) |
-| **DTOs** | Data transfer |
+| Layer          | Responsibility                                    |
+| -------------- | ------------------------------------------------- |
+| **Repository** | Data access and database operations               |
+| **Service**    | Business logic and validation                     |
+| **Controller** | Handle requests and return responses              |
+| **View**       | Display data to users using Razor Views           |
+| **DTOs**       | Data transfer between layers                     |
 
-## Architecture Flow
+### Architecture Layers
 
 ```text
 Controller
@@ -154,162 +149,109 @@ EducationalConsulting
 └── EducationalConsulting.csproj
 ```
 
----
-
-# 🎯 Key Features
-
-## 📄 Article Management
-
-- Create
-- Read
-- Update
-- Delete
-- Category Management
-- Rich Text Editor
-- Image Upload
-- Video Upload
 
 ---
 
-## 👨‍💼 Admin Panel
+## 🎯 Key Features
 
-- Session-based Authentication
-- Manage Articles
-- Manage Categories
-- Active / Inactive Status
+### 1️⃣ Article Management System
 
----
+- Full CRUD operations
+- Category-based organization
+- Rich text editing with CKEditor
+- Image and video upload support
 
-## 📚 Content Display
+### 2️⃣ Admin Panel
 
-- Pagination
-- Category Filtering
-- Article Details
-- Latest Articles Sidebar
-- Responsive RTL Layout
+- Secure login system (Session-based)
+- Article management interface
+- Category management
+- Article status (Active/Inactive)
 
----
+### 3️⃣ Content Display
 
-## 📤 File Upload
+- Paginated article listing
+- Category filtering
+- Article details view
+- Dynamic sidebar with latest articles
+- Responsive RTL design
 
-- Image Upload
-- Video Upload (100MB)
-- Secure Storage
+### 4️⃣ File Upload System
 
-```
-wwwroot/uploads/
-```
+- Image upload for articles
+- Video upload support (up to 100MB)
+- Secure file storage in `wwwroot/uploads/`
 
----
+### 5️⃣ Security Features
 
-## 🔒 Security
-
-- Session Authentication
-- HTTPS
-- Password Hashing *(Planned)*
-- Role-based Authorization *(Planned)*
-
----
-
-# 🛠️ Technologies Used
-
-## Backend
-
-- ASP.NET Core MVC (.NET 8)
-- C#
-- Entity Framework Core
-- SQL Server (LocalDB)
-- Repository Pattern
-- Service Layer
-- Dependency Injection
+- Session-based authentication
+- Password hashing (planned)
+- Role-based access control (planned)
+- HTTPS enforcement
 
 ---
 
-## Frontend
+## 🛠️ Technologies Used
 
-- Bootstrap 5 RTL
-- jQuery
-- Bootstrap JS
-- CKEditor 4
-- Font Awesome
-- Vazir Font
+### Backend
 
----
+- **Framework:** ASP.NET Core MVC (.NET 8)
+- **Language:** C#
+- **ORM:** Entity Framework Core (Code-First)
+- **Database:** SQL Server (LocalDB)
+- **Patterns:** Repository, Service, Dependency Injection
 
-## Development Tools
+### Frontend
 
-- Visual Studio 2022
-- Git
-- GitHub
-- Swagger
-- Postman
+- **CSS Framework:** Bootstrap 5 (RTL)
+- **Fonts:** Vazir (Persian font)
+- **Editor:** CKEditor 4
+- **Icons:** Font Awesome
+- **JavaScript:** jQuery, Bootstrap JS
 
----
+### Tools & Version Control
 
-# 💡 Design Decisions
-
-## Why store `Content` as string?
-
-The article body is stored as HTML.
-
-Advantages:
-
-- Supports rich formatting
-- Easy CKEditor integration
-- Images & videos
-- Simple rendering using:
-
-```cshtml
-@Html.Raw(Model.Content)
-```
+- **Version Control:** Git & GitHub
+- **IDE:** Visual Studio 2022
+- **API Testing:** Swagger/Postman
 
 ---
 
-## Why UploadController?
+## 💡 Key Design Decisions
 
-A dedicated controller:
+### 1. Why string `Content`?
 
-- Better separation of concerns
-- Cleaner AdminController
-- Easier maintenance
-- Reusable upload logic
+Article content is stored as HTML string. This allows:
+- Full formatting flexibility
+- Embedding images and videos via URLs
+- Easy integration with CKEditor
+- Simple display with `@Html.Raw()`
 
----
+### 2. Why Separate Upload Controller?
 
-## Why Repository + Service Pattern?
+`UploadController` handles file uploads separately:
+- Keeps `AdminController` clean
+- Improves maintainability
+- Enables reuse across the application
 
-Repository
+### 3. Why Repository & Service Layers?
 
-- Database operations only
-
-Service
-
-- Business logic
-
-Controller
-
-- Request handling
-
-Benefits:
-
-- Clean Architecture
-- Easy Testing
-- Better Maintainability
-- Scalability
+- **Repository:** Data access abstraction
+- **Service:** Business logic separation
+- **Controller:** Request handling only
+- **Benefits:** Testable, maintainable, scalable
 
 ---
 
-# 🚀 Getting Started
+## 🚀 Getting Started
 
-## Prerequisites
+### Prerequisites
 
-- .NET 8 SDK
-- SQL Server (LocalDB)
-- Visual Studio 2022
+- .NET 8.0 SDK
+- SQL Server (LocalDB or full version)
+- Visual Studio 2022 (recommended)
 
----
-
-## Clone Repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/MasoudMiri/EducationalConsulting.git
@@ -436,27 +378,6 @@ Screenshots will be added after the project is completed.
 
 ---
 
-# 🤝 Contributing
-
-Contributions are welcome.
-
-```bash
-Fork the repository
-
-Create a new branch
-git checkout -b feature/AmazingFeature
-
-Commit changes
-git commit -m "Add AmazingFeature"
-
-Push branch
-git push origin feature/AmazingFeature
-
-Open a Pull Request
-```
-
----
-
 # 📬 Contact
 
 **Masoud Miri**
@@ -467,20 +388,9 @@ GitHub
 
 https://github.com/MasoudMiri
 
-LinkedIn
-
-https://linkedin.com
 
 ---
 
-# 🙏 Acknowledgments
-
-- ASP.NET Core Documentation
-- Bootstrap RTL
-- CKEditor Team
-- Font Awesome
-
----
 
 # ⭐ Support
 
