@@ -39,7 +39,7 @@ namespace EducationalConsulting.Data
                 .ToListAsync();
         }
 
-        public async Task<Article> GetByIdAsync(int id)
+        public async Task<Article?> GetByIdAsync(int id)
         {
             return await _context.Articles
                 .Include(a => a.Category)
@@ -75,7 +75,7 @@ namespace EducationalConsulting.Data
             return await _context.Articles.AnyAsync(e => e.Id == id);
         }
 
-        // متد جدید برای گرفتن آخرین مقالات (درست شده)
+        
         public async Task<IEnumerable<ArticleListDto>> GetLatestArticlesAsync(int count)
         {
             var articles = await _context.Articles
@@ -86,9 +86,9 @@ namespace EducationalConsulting.Data
                 .Select(a => new ArticleListDto
                 {
                     Id = a.Id,
-                    Title = a.Title,
-                    Summary = a.Summary,
-                    ImageUrl = a.ImageUrl,
+                    Title = a.Title?? string.Empty,
+                    Summary = a.Summary ?? string.Empty,
+                    ImageUrl = a.ImageUrl ?? string.Empty,
                     CreateDate = a.CreateDate,
                     ViewCount = a.ViewCount,
                     CategoryName = a.Category != null ? a.Category.Name : ""

@@ -23,7 +23,7 @@ namespace EducationalConsulting.Services
 
         public bool ValidateAdminLogin(string username, string password)
         {
-            // TODO: بعداً از دیتابیس بخون
+            
             return username == "admin" && password == "123456";
         }
 

@@ -10,7 +10,7 @@ namespace EducationalConsulting.Data
         {
         }
 
-        // DbSetها (جدول‌های دیتابیس)
+       
         public DbSet<Category> Categories { get; set; }
         public DbSet<Article> Articles { get; set; }
 
@@ -18,7 +18,7 @@ namespace EducationalConsulting.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // اضافه کردن داده‌های اولیه (4 دسته اصلی)
+            
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "عمومی", IsActive = true, CreateDate = DateTime.Now },
                 new Category { Id = 2, Name = "ریاضی", IsActive = true, CreateDate = DateTime.Now },

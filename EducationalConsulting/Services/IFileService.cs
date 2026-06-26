@@ -8,7 +8,7 @@ namespace EducationalConsulting.Services
         Task<string> SaveVideoAsync(IFormFile videoFile, string subFolder = "articles");
 
         void DeleteFile(string filePath);
-        void DeleteImage(string imagePath);  // ← جدید
+        void DeleteImage(string imagePath);  
 
         bool FileExists(string filePath);
         bool IsValidImage(IFormFile file);

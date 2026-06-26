@@ -96,3 +96,13 @@
 .content-col {
     order: 0;
 }
+/* ===== رفع مشکل منوی کشویی ===== */
+.dropdown-menu .dropdown-item {
+    background-color: transparent !important;
+    color: #ffffff !important;
+}
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #dbc64c !important;
+        color: #270b60 !important;
+    }

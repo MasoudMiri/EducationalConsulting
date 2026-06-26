@@ -52,7 +52,7 @@ a {
     outline: none !important;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
-    -ms-transition: all .3s ease-in-out;
+    
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
@@ -147,7 +147,7 @@ a,
     outline: none !important;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
-    -ms-transition: all .3s ease-in-out;
+    
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
@@ -1478,3 +1478,60 @@ textarea#comment::placeholder {
         height: 45px;
     }
 }
+/* ===== منوی کشویی مقالات ===== */
+.dropdown-menu .dropdown-item {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+}
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #dbc64c !important;
+        color: #270b60 !important;
+        border-radius: 5px;
+        padding-right: 20px;
+    }
+
+/* ===== اصلاح پس‌زمینه منوی کشویی ===== */
+.dropdown-menu {
+    background-color: #270b60 !important;
+    border: 1px solid #dbc64c !important;
+    border-radius: 10px !important;
+    padding: 8px 0 !important;
+    min-width: 180px !important;
+}
+/* ===== منوی کشویی لیست مقالات ===== */
+
+/* استایل کلی منوی کشویی */
+.custom-header .dropdown-menu {
+    background-color: #270b60 !important;
+    border: 1px solid #dbc64c !important;
+    border-radius: 10px !important;
+    padding: 8px 0 !important;
+    min-width: 200px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* استایل آیتم‌های منو */
+.custom-header .dropdown-item {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    border-radius: 0 !important;
+}
+
+    /* وقتی موس می‌رود روی آیتم (Hover) */
+    .custom-header .dropdown-item:hover {
+        background-color: #dbc64c !important;
+        color: #270b60 !important;
+        padding-right: 25px !important; /* حرکت به سمت راست برای زیبایی */
+        font-weight: 500 !important;
+    }
+
+    /* وقتی آیتم فعال است (Active) */
+    .custom-header .dropdown-item:active {
+        background-color: #dbc64c !important;
+        color: #270b60 !important;
+    }

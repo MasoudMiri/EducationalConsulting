@@ -17,12 +17,12 @@ namespace EducationalConsulting.Data
             return await _context.Categories.ToListAsync();
         }
 
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<Category?> GetByIdAsync(int id)
         {
             return await _context.Categories.FindAsync(id);
         }
 
-        public async Task<Category> GetByNameAsync(string name)
+        public async Task<Category?> GetByNameAsync(string name)
         {
             return await _context.Categories.FirstOrDefaultAsync(c => c.Name == name);
         }

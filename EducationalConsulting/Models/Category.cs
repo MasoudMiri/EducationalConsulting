@@ -10,7 +10,7 @@ namespace EducationalConsulting.Models
         [Required(ErrorMessage = "نام دسته الزامی است")]
         [Display(Name = "نام دسته")]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Display(Name = "فعال")]
         public bool IsActive { get; set; } = true;
@@ -18,7 +18,7 @@ namespace EducationalConsulting.Models
         [Display(Name = "تاریخ ایجاد")]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        // ارتباط با مقالات (یک دسته چندین مقاله دارد)
-        public virtual ICollection<Article> Articles { get; set; }
+        
+        public virtual ICollection<Article>? Articles { get; set; }
     }
 }

@@ -20,9 +20,7 @@ namespace EducationalConsulting.Services
             _fileService = fileService;
         }
 
-        // ============================================================
-        //  مدیریت مقالات
-        // ============================================================
+
 
         public async Task<IEnumerable<AdminArticlesViewModel>> GetAllArticlesForAdminAsync()
         {
@@ -145,9 +143,7 @@ namespace EducationalConsulting.Services
             }
         }
 
-        // ============================================================
-        //  مدیریت دسته‌بندی‌ها
-        // ============================================================
+
 
         public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
         {

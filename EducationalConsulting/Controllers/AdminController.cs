@@ -15,7 +15,7 @@ namespace EducationalConsulting.Controllers
             _authService = authService;
         }
 
-        // ========== احراز هویت ==========
+        
         public IActionResult Login()
         {
             if (_authService.IsAdminLoggedIn(HttpContext.Session))
@@ -39,7 +39,7 @@ namespace EducationalConsulting.Controllers
             return RedirectToAction("Login");
         }
 
-        // ========== پنل مدیریت ==========
+        
         public IActionResult Index()
         {
             if (!_authService.IsAdminLoggedIn(HttpContext.Session))
@@ -56,7 +56,7 @@ namespace EducationalConsulting.Controllers
             return View(articles);
         }
 
-        // ========== مدیریت مقالات ==========
+        
         public async Task<IActionResult> CreateArticle()
         {
             if (!_authService.IsAdminLoggedIn(HttpContext.Session))

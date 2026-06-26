@@ -8,11 +8,13 @@ namespace EducationalConsulting.Services
     {
         private readonly IArticleRepository _articleRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IFileService _fileService;
 
         public ArticleService(
             IArticleRepository articleRepository,
             ICategoryRepository categoryRepository,
+            IWebHostEnvironment webHostEnvironment,
             IFileService fileService)
         {
             _articleRepository = articleRepository;
@@ -31,12 +33,12 @@ namespace EducationalConsulting.Services
             return articles.Select(a => new ArticleListDto
             {
                 Id = a.Id,
-                Title = a.Title,
-                Summary = a.Summary,
-                ImageUrl = a.ImageUrl,
+                Title = a.Title ?? string.Empty,
+                Summary = a.Summary ?? string.Empty,
+                ImageUrl = a.ImageUrl ?? string.Empty,
                 CreateDate = a.CreateDate,
                 ViewCount = a.ViewCount,
-                CategoryName = category.Name
+                CategoryName = category.Name ?? string.Empty
             });
         }
 
@@ -49,14 +51,14 @@ namespace EducationalConsulting.Services
             return new ArticleDetailDto
             {
                 Id = article.Id,
-                Title = article.Title,
-                Summary = article.Summary,
-                Content = article.Content,
-                ImageUrl = article.ImageUrl,
+                Title = article.Title ?? string.Empty,
+                Summary = article.Summary ?? string.Empty,
+                Content = article.Content ?? string.Empty,
+                ImageUrl = article.ImageUrl ?? string.Empty,
                 CreateDate = article.CreateDate,
                 LastModifiedDate = article.LastModifiedDate,
                 ViewCount = article.ViewCount,
-                CategoryName = article.Category?.Name,
+                CategoryName = article.Category?.Name ?? string.Empty,
                 CategoryId = article.CategoryId,
                 IsActive = article.IsActive
             };
