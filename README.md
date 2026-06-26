@@ -389,18 +389,14 @@ Articles (Many)
 ![Admin 2](ScreenShots/admin2.png)
 ![Admin 3](ScreenShots/admin3.png)
 
-
 ---
 
-# 📬 Contact
-
+### 📬 Contact
 **Masoud Miri**
 
 📧 masoudmiri7667@gmail.com
 
-GitHub
-
-https://github.com/MasoudMiri
+🔗 [GitHub](https://github.com/MasoudMiri)
 
 
 ---
