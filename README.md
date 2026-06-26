@@ -371,9 +371,25 @@ Articles (Many)
 
 ---
 
-# 📷 Screenshots
+## 📸 Screenshots
 
-Screenshots will be added after the project is completed.
+### صفحه اصلی
+![Homepage 1](ScreenShots/homepage1.png)
+![Homepage 2](ScreenShots/homepage2.png)
+![Homepage 3](ScreenShots/homepage3.png)
+![Homepage 4](ScreenShots/homepage4.png)
+
+### بخش مقالات
+![Articles 1](ScreenShots/articles1.png)
+![Articles 2](ScreenShots/articles2.png)
+![Articles 3](ScreenShots/articles3.png)
+
+### پنل ادمین
+![Admin 1](ScreenShots/admin1.png)
+![Admin 2](ScreenShots/admin2.png)
+![Admin 3](ScreenShots/admin3.png)
+
+
 
 ---
 
