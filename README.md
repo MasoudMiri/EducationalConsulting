@@ -1,13 +1,17 @@
 ````markdown
 # EducationalConsulting
 
-A comprehensive educational consulting website built with **ASP.NET Core MVC**. This project provides a platform for educational consulting services, featuring article management, user authentication, and package-based content delivery.
+A comprehensive educational consulting website built with **ASP.NET Core MVC**. This project provides
+a platform for educational consulting services, featuring article management, user authentication,
+ and package-based content delivery.
 
 ---
 
 # 📖 About The Project
 
-EducationalConsulting is a web application designed for educational consulting services. It allows administrators to manage articles and content while providing users with access to educational materials based on their subscription packages.
+EducationalConsulting is a web application designed for educational consulting services. It allows administrators
+ to manage articles and content while providing users with access
+to educational materials based on their subscription packages.
 
 > 🚧 **Current Status:** Under Active Development
 
